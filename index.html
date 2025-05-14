@@ -1,35 +1,406 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Jobs — Робота в Польщі</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      text-align: center;
-      padding: 50px;
-    }
-    h1 {
-      color: #333;
-    }
-    p {
-      font-size: 20px;
-      color: #555;
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUROPE SERVICE - Ліцензоване кадрове агентство</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 50%, #7209b7 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 15s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* Navigation */
+        .breadcrumbs {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--accent);
+        }
+        
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* Job Listings */
+        .job-listing {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .job-listing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(67,97,238,0.05) 0%, rgba(255,255,255,0) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .job-listing:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-left-color: var(--accent);
+        }
+        
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .job-details {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .job-details p {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .job-details p::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .salary {
+            font-weight: 600;
+            color: var(--secondary);
+            background: rgba(67,97,238,0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        /* Separator */
+        .separator {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(67,97,238,0) 0%, rgba(67,97,238,0.5) 50%, rgba(67,97,238,0) 100%);
+            z-index: 1;
+        }
+        
+        .separator span {
+            display: inline-block;
+            background: white;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        /* List Styles */
+        ul.features {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        ul.features li {
+            background: rgba(67,97,238,0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        ul.features li:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67,97,238,0.3);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .job-listing {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .job-listing:nth-child(1) { animation-delay: 0.1s; }
+        .job-listing:nth-child(2) { animation-delay: 0.2s; }
+        .job-listing:nth-child(3) { animation-delay: 0.3s; }
+        .job-listing:nth-child(4) { animation-delay: 0.4s; }
+        .job-listing:nth-child(5) { animation-delay: 0.5s; }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container header-content">
+            <h1>EURОРЕ SERVICE</h1>
+            <p class="tagline">Ліцензоване кадрове агентство</p>
+        </div>
+    </header>
 
-  <h1>Profil Jobs</h1>
-  <p>Робота в Польщі для українців</p>
-  <p>Ми допомагаємо знайти чесну та легальну роботу з офіційним оформленням.</p>
-  <p>Сайт розміщено на <a href="https://pages.github.com" target="_blank">GitHub Pages</a>.</p>
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="#">Головна сторінка</a> / <a href="#">Робота в Польщі</a>
+        </div>
 
+        <section class="section">
+            <h2>Висновки</h2>
+            <h3>Важності у Полугих</h3>
+            <h3>Про має</h3>
+            <h3>Співпраця</h3>
+            <h3>Відгуки</h3>
+            <h3>Нахили</h3>
+            <h3>Комплект</h3>
+        </section>
+
+        <div class="separator"><span>Вакансії</span></div>
+
+        <section class="section">
+            <h2>Робота в Польщі для українців</h2>
+            <ul class="features">
+                <li>Польща</li>
+                <li>Чабій</li>
+                <li>Мінімальна</li>
+                <li>Назагальна</li>
+                <li>Румусія</li>
+                <li>Ракія</li>
+            </ul>
+        </section>
+
+        <div class="separator"><span>Фільтри</span></div>
+
+        <ul class="features">
+            <li>Вид динаміку</li>
+            <li>Тип підприємства</li>
+            <li>Країна</li>
+            <li>Фільтр по місяць</li>
+        </ul>
+
+        <div class="separator"><span>Пропозиції</span></div>
+
+        <div class="job-listing">
+            <div class="job-title">Прицівник на завод Соса-Сola Company</div>
+            <div class="job-details">
+                <div class="salary">23.50-30.30 zł/год | 6200-6300 zł/міс</div>
+                <p>Графік: 10 год/день, 5-6 разів на тиждень</p>
+                <p>Трудовий договір: Urmour Zacarne</p>
+                <p>Проживання: Laptons безкоштовно</p>
+                <p>Місце роботи: Польща</p>
+            </div>
+        </div>
+
+        <div class="separator"><span>Динамою більше</span></div>
+
+        <div class="job-listing">
+            <div class="job-title">Пакувальник продукції Nutella</div>
+            <div class="job-details">
+                <div class="salary">23.50-30.30 zł/год | 6200-6300 zł/міс</div>
+                <p>Графік: 10 год/день, 5-6 разів на тиждень</p>
+                <p>Трудовий договір: Urmour Zacarne</p>
+                <p>Проживання: Laptons безкоштовно</p>
+                <p>Місце роботи: Польща</p>
+            </div>
+        </div>
+
+        <div class="separator"><span>Динамою більше</span></div>
+
+        <div class="job-listing">
+            <div class="job-title">Пакувальник продукції на фабриці Ferrero Rocher</div>
+            <div class="job-details">
+                <div class="salary">4000-5000 zł/міс</div>
+                <p>Графік: 10 год/день, 5-6 разів на тиждень</p>
+                <p>Трудовий договір: Urmour zacarne</p>
+                <p>Проживання: Laptons безкоштовно</p>
+                <p>Місце роботи: Польща</p>
+            </div>
+        </div>
+
+        <!-- Інші вакансії можна додати за аналогією -->
+
+        <div class="job-listing">
+            <div class="job-title">Прицівник супермаркету Biedronka</div>
+            <div class="job-details">
+                <div class="salary">24-25 zł/год | 4800-8000 zł/міс</div>
+                <p>Графік: 8-12 год/день</p>
+                <p>Трудовий договір: Urmour Zacarne</p>
+                <p>Проживання: Laptons безкоштовно</p>
+                <p>Місце роботи: Польща</p>
+            </div>
+        </div>
+
+        <div class="separator"><span>Динамою більше</span></div>
+
+        <!-- І так далі для всіх вакансій -->
+
+    </div>
+
+    <footer class="container">
+        <p>© 2023 EUROPE SERVICE. Всі права захищені.</p>
+    </footer>
 </body>
 </html>
