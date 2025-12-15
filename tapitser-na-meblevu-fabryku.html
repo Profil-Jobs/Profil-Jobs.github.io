@@ -145,7 +145,7 @@
         /* Instagram-style Dots */
         .dots-container { 
             position: absolute; 
-            bottom: 5px; /* --- FIX: Lowered for both Desktop and Mobile (was 20px) --- */
+            bottom: 5px; 
             left: 50%; transform: translateX(-50%);
             width: 88px; 
             height: 24px;
@@ -941,7 +941,7 @@
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-briefcase"></i></div><h4>Легальне працевлаштування</h4><p>Тільки офіційне оформлення з повним соцпакетом.</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-file-signature"></i></div><h4>Офіційний договір</h4><p>Прозорі умови співпраці, ознайомлення з договором перед виїздом.</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-headset"></i></div><h4>Підтримка 24/7</h4><p>Персональний координатор на зв'язку цілодобово.</p></div>
-                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-home"></i></div><h4>Проживання</h4><p>Житло з комфортними умовами. За фіксовану вартість</p></div>
+                <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-home"></i></div><h4>Проживання</h4><p>Житло з комфортними умовами. За фіксовану вартість.</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-bus"></i></div><h4>Трансфери</h4><p>Організований доїзд до місця роботи.</p></div>
                 <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-passport"></i></div><h4>Допомога з документами</h4><p>Повний супровід в оформленні легального перебування в Польщі.</p></div>
             </div>
@@ -1001,7 +1001,7 @@
 
         <div class="contact-section">
             <div class="contact-bg-anim">
-                <div class="pattern-row move-left"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
+                <div class="pattern-row move-left"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
                 <div class="pattern-row move-right"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
             </div>
 
@@ -1276,13 +1276,37 @@
             // --- iPhone Widget Dynamic Logic ---
             const phoneSlider = document.getElementById('gallery-phone');
             if (phoneSlider) {
-                // Auto Scroll Logic for iPhone (DISABLED ON MOBILE)
-                setInterval(() => {
-                    if (window.innerWidth > 768) { // Only scroll if screen width > 768px
-                        const { scrollTop, scrollHeight, clientHeight } = phoneSlider;
-                        phoneSlider.scrollBy({ top: (scrollTop + clientHeight >= scrollHeight - 10) ? -scrollHeight : clientHeight, behavior: 'smooth' });
+                let autoScrollInterval;
+
+                // Stop function: clears interval and removes listeners
+                const stopAutoScroll = () => {
+                    if (autoScrollInterval) {
+                        clearInterval(autoScrollInterval);
+                        autoScrollInterval = null;
+                        // Once stopped by interaction, remove listeners so they don't fire again
+                        phoneSlider.removeEventListener('touchstart', stopAutoScroll);
+                        phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
+                        phoneSlider.removeEventListener('wheel', stopAutoScroll);
                     }
-                }, 3000);
+                };
+
+                // Add listeners for user interaction to stop auto-scroll PERMANENTLY
+                phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
+                phoneSlider.addEventListener('pointerdown', stopAutoScroll);
+                phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
+
+                // Function to start scrolling
+                const startAutoScroll = () => {
+                    autoScrollInterval = setInterval(() => {
+                        const { scrollTop, scrollHeight, clientHeight } = phoneSlider;
+                        // Logic to prevent black screen: if at bottom, jump to top
+                        if (scrollTop + clientHeight >= scrollHeight - 10) {
+                            phoneSlider.scrollTo({ top: 0, behavior: 'smooth' });
+                        } else {
+                            phoneSlider.scrollBy({ top: clientHeight, behavior: 'smooth' });
+                        }
+                    }, 3000);
+                };
 
                 // Fetch and Populate Dynamically
                 fetchDriveFiles('1ZOrUJ64ntSCeFh8ze7d86Iu6pghye023').then(files => {
@@ -1300,6 +1324,9 @@
                             }
                         });
                         phoneSlider.appendChild(fragment);
+                        
+                        // Start auto-scroll ONLY after content is loaded
+                        startAutoScroll();
                     }
                 });
             }
