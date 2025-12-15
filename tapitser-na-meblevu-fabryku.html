@@ -120,7 +120,7 @@
             border-radius: 20px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); 
             margin: 0 auto 40px auto; 
             background: #fff; min-height: 300px;
-            /* FIX: SWIPE-BACK PREVENTION */
+            /* SWIPE-BACK PREVENTION */
             touch-action: pan-y pinch-zoom;
             overscroll-behavior-x: none;
         }
@@ -645,7 +645,9 @@
                 min-height: auto; 
                 padding-bottom: 0;
             }
-            .gallery { transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) !important; }
+            /* 🔹 FIX: Smoother animation on mobile */
+            .gallery { transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important; }
+            
             .slide img { height: 240px; border-radius: 0 !important; }
             .nav-btn { display: none !important; }
             
@@ -705,6 +707,11 @@
             }
             .iphone-15-pro { transform: scale(0.9); transform-origin: top center; }
             .shadow-layer { left: 10px; right: 10px; }
+            
+            /* 🔹 FIX: 1 Swipe = 1 Slide for iPhone Widget on Mobile */
+            .gallery-container-phone {
+                scroll-snap-stop: always; /* Forces stop at each slide */
+            }
             
             .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; }
             .footer-laconic-links { flex-direction: column; gap: 10px; }
@@ -1002,7 +1009,7 @@
         <div class="contact-section">
             <div class="contact-bg-anim">
                 <div class="pattern-row move-left"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
-                <div class="pattern-row move-right"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
+                <div class="pattern-row move-right"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
             </div>
 
             <div class="contact-header"><h2>Наші Контакти</h2><p class="contact-subtitle">Зв’яжіться з нами зручним для вас способом</p></div>
@@ -1278,19 +1285,21 @@
             if (phoneSlider) {
                 let autoScrollInterval;
 
-                // Stop function: clears interval and removes listeners
+                // Stop function: clears interval and removes listeners ONLY ON MOBILE
                 const stopAutoScroll = () => {
-                    if (autoScrollInterval) {
-                        clearInterval(autoScrollInterval);
-                        autoScrollInterval = null;
-                        // Once stopped by interaction, remove listeners so they don't fire again
-                        phoneSlider.removeEventListener('touchstart', stopAutoScroll);
-                        phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
-                        phoneSlider.removeEventListener('wheel', stopAutoScroll);
+                    if (window.innerWidth <= 768) { // Only stop on mobile
+                        if (autoScrollInterval) {
+                            clearInterval(autoScrollInterval);
+                            autoScrollInterval = null;
+                            // Once stopped by interaction, remove listeners so they don't fire again
+                            phoneSlider.removeEventListener('touchstart', stopAutoScroll);
+                            phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
+                            phoneSlider.removeEventListener('wheel', stopAutoScroll);
+                        }
                     }
                 };
 
-                // Add listeners for user interaction to stop auto-scroll PERMANENTLY
+                // Add listeners for user interaction to stop auto-scroll PERMANENTLY (mobile only)
                 phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
                 phoneSlider.addEventListener('pointerdown', stopAutoScroll);
                 phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
