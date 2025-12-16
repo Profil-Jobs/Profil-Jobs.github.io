@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Licencja i Nota Prawna / Ліцензія</title>
+    <style>
+        /* 
+           Design System: Dual-Language Legal Document
+           Focus: Readability, hierarchy, and clear distinction between languages.
+        */
+
+        :root {
+            --font-stack: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --base-size: 16px;
+            --line-height: 1.6;
+            
+            /* Colors */
+            --bg-color: #ffffff;
+            --text-primary: #111111; /* Main legal text (PL) */
+            --text-secondary: #555555; /* Secondary text (UA) */
+            --text-meta: #767676; /* Dates and meta info */
+            --border-color: #eaeaea;
+            --link-color: #0066cc;
+            
+            /* Spacing */
+            --content-width: 740px;
+            --spacing-section: 48px;
+            --spacing-block: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-size: var(--base-size);
+            line-height: var(--line-height);
+            -webkit-font-smoothing: antialiased;
+            padding: 60px 20px;
+        }
+
+        .legal-container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .meta-date {
+            font-size: 0.9rem;
+            color: var(--text-meta);
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .author-badge {
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Typography & Sections --- */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: var(--spacing-section);
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        /* Dual Language Handling */
+        .h2-sub {
+            font-weight: 400;
+            color: var(--text-meta);
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+
+        .text-block {
+            margin-bottom: var(--spacing-block);
+        }
+
+        /* Primary Language (PL) */
+        p.lang-primary {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        /* Secondary Language (UA) */
+        p.lang-secondary {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 16px;
+            /* Indent slightly to differentiate visually */
+            border-left: 3px solid #eee;
+            padding-left: 12px;
+        }
+
+        /* Info Box for Company Data */
+        .info-box {
+            background-color: #fafafa;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: var(--spacing-section);
+        }
+
+        .info-box h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-meta);
+        }
+
+        /* Specific Note Box */
+        .note-box {
+            margin-top: 60px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .legal-footer {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-meta);
+            text-align: center;
+        }
+        
+        .footer-repo-note {
+            margin-top: 12px;
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.75rem; }
+            .h2-sub { display: block; margin-left: 0; margin-top: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <article class="legal-container">
+        
+        <header>
+            <h1>Licencja i Nota Prawna <span style="font-weight:400; color:#999;">/ Ліцензія</span></h1>
+            <span class="meta-date">Ostatnia aktualizacja / Останнє оновлення: 16.12.2025</span>
+            
+            <div class="author-badge">
+                <strong>© 2025 NicholaStas</strong> — wszelkie prawa zastrzeżone / всі права захищено.<br>
+                Kontakt: <a href="mailto:nicholas.stas.company@gmail.com">nicholas.stas.company@gmail.com</a>
+            </div>
+        </header>
+
+        <!-- INTRO SECTIONS -->
+        
+        <section class="info-box">
+            <h3>Informacja skrócona (PL) — WERSJA PRIORYTETOWA</h3>
+            <p class="lang-primary">Niniejszy serwis internetowy został w całości stworzony i opracowany przez rekrutera NicholaStas dla firmy Profil Jobs.</p>
+            <p class="lang-primary">Wszystkie prawa do strony, jej struktury, projektu graficznego, kodu źródłowego, treści tekstowych, plików multimedialnych oraz elementów interfejsu należą do autora — NicholaStas.</p>
+            <p class="lang-primary">Dane dotyczące firmy Profil Jobs (nazwa, informacje rejestrowe REGON: 386594291, KRS: 0000851046, NIP: 5252829545, adres biura: Warszawa, ul. Twarda 18, piętro 15) zostały zaczerpnięte ze źródeł publicznych i pozostają własnością firmy Profil Jobs.</p>
+            <p class="lang-primary">Nazwa „Profil Jobs” oraz część informacji o działalności firmy są zamieszczone w ramach współpracy.</p>
+            
+            <p class="lang-primary"><strong>Zdjęcia związane z ofertami pracy oraz miejscami pracy są wykorzystywane na podstawie licencji, do których wyłącznym uprawnionym jest NicholaStas, o ile wyraźnie nie wskazano inaczej. Zdjęcia zakwaterowania należą do firmy Profil Jobs lub zostały jej przekazane i są wykorzystywane za zgodą firmy w ramach współpracy. Jakiekolwiek wykorzystanie zdjęć ze strony przez osoby trzecie bez odpowiedniej licencji lub pisemnej zgody właściciela praw stanowi naruszenie praw autorskich.</strong></p>
+            
+            <p class="lang-primary" style="margin-top:12px;">Dane kontaktowe oraz odnośniki do mediów społecznościowych należą do autora — NicholaStas.</p>
+        </section>
+
+        <section class="text-block" style="margin-bottom: 60px;">
+            <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-secondary);">Коротка інформація (UA)</h3>
+            <p class="lang-secondary">Цей вебсайт створено та розроблено рекрутером NicholaStas для компанії Profil Jobs.</p>
+            <p class="lang-secondary">Усі права на сайт, його структуру, дизайн, програмний код, текстовий контент, медіафайли та елементи інтерфейсу належать автору — NicholaStas.</p>
+            <p class="lang-secondary">Розміщені на сайті дані про компанію Profil Jobs (назва, офіційні реєстраційні дані REGON: 386594291, KRS: 0000851046, NIP: 5252829545, адреса офісу: Warszawa, Twarda 18, поверх 15) взяті з відкритих джерел і є власністю компанії Profil Jobs.</p>
+            <p class="lang-secondary">Назва «Profil Jobs» та частина інформації про діяльність компанії розміщені на сайті в межах співпраці.</p>
+            
+            <p class="lang-secondary"><strong>Фотографії, пов’язані з вакансіями та робочими місцями, використовуються на підставі ліцензій, виключним правовласником яких є NicholaStas, якщо прямо не зазначено інше. Фотографії житла належать компанії Profil Jobs або були надані нею в межах співпраці та використовуються за дозволом компанії. Будь-яке використання фотографій з цього сайту третіми особами без відповідної ліцензії або письмового дозволу правовласника є порушенням авторських прав.</strong></p>
+            
+            <p class="lang-secondary">Контакти та посилання на соціальні мережі належать автору — NicholaStas.</p>
+        </section>
+
+        <!-- LICENSE TERMS -->
+        
+        <h2>1. Prawa autorskie <span class="h2-sub">/ Авторські права</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Autor posiada wszelkie wyłączne prawa do niniejszej strony.</p>
+            <p class="lang-secondary">Автор володіє всіма виключними правами на цей сайт.</p>
+            
+            <p class="lang-primary">Jakiekolwiek kopiowanie, odtwarzanie, rozpowszechnianie, sprzedaż lub komercyjne wykorzystanie bez pisemnej zgody autora jest zabronione.</p>
+            <p class="lang-secondary">Будь-яке копіювання, відтворення, розповсюдження, продаж або комерційне використання без письмового дозволу автора заборонено.</p>
+            
+            <p class="lang-primary">Autor ma prawo wprowadzać zmiany w stronie, ograniczać dostęp lub modyfikować postanowienia licencji bez uprzedzenia.</p>
+            <p class="lang-secondary">Автор має право вносити зміни до сайту, закривати доступ або змінювати умови ліцензії без попередження.</p>
+        </div>
+
+        <h2>2. Informacje firmy <span class="h2-sub">/ Інформація компанії</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Oficjalne dane rejestrowe firmy Profil Jobs zamieszczone na stronie stanowią własność firmy.</p>
+            <p class="lang-secondary">Офіційні реєстраційні дані компанії Profil Jobs, розміщені на сайті, є власністю компанії.</p>
+            
+            <p class="lang-primary">Publikacja tych danych nie przenosi na firmę Profil Jobs żadnych praw własności do strony.</p>
+            <p class="lang-secondary">Розміщення цих даних не передає жодних прав власності на сайт компанії Profil Jobs.</p>
+        </div>
+
+        <h2>3. Materiały dotyczące ofert pracy <span class="h2-sub">/ Матеріали вакансій</span></h2>
+        <div class="text-block">
+            <p class="lang-primary"><strong>Zdjęcia związane z ofertami pracy oraz miejscami pracy są wykorzystywane na podstawie licencji, do których wyłącznym właścicielem praw jest NicholaStas, o ile wyraźnie nie wskazano inaczej.</strong></p>
+            <p class="lang-primary"><strong>Zdjęcia zakwaterowania należą do firmy Profil Jobs lub zostały przez nią przekazane i są wykorzystywane zgodnie z prawem w ramach współpracy.</strong></p>
+            <p class="lang-primary"><strong>Wykorzystywanie jakichkolwiek zdjęć ze strony bez zgody odpowiedniego właściciela praw jest zabronione.</strong></p>
+            
+            <p class="lang-secondary" style="margin-top:16px;"><strong>Фотографії, пов’язані з вакансіями та робочими місцями, використовуються на підставі ліцензій, виключним правовласником яких є NicholaStas, якщо прямо не зазначено інше.</strong></p>
+            <p class="lang-secondary"><strong>Фотографії житла належать компанії Profil Jobs або були надані нею та використовуються на законних підставах у межах співпраці.</strong></p>
+            <p class="lang-secondary"><strong>Використання будь-яких фотографій з цього сайту без дозволу відповідного правовласника заборонене.</strong></p>
+        </div>
+
+        <h2>4. Korzystanie ze strony <span class="h2-sub">/ Використання сайту</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Stronę można przeglądać wyłącznie do użytku osobistego i niekomercyjnego.</p>
+            <p class="lang-secondary">Сайт можна переглядати для особистого, некомерційного використання.</p>
+            
+            <p class="lang-primary">Wszelkie inne działania na treściach — wyłącznie za zgodą autora:</p>
+            <p class="lang-secondary">Будь-які інші дії з контентом — лише за дозволом автора:</p>
+            <p class="lang-primary"><a href="mailto:nicholas.stas.company@gmail.com">nicholas.stas.company@gmail.com</a></p>
+        </div>
+
+        <h2>5. Naruszenia i odpowiedzialność <span class="h2-sub">/ Порушення</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Nieautoryzowane wykorzystanie jakiejkolwiek części strony stanowi naruszenie praw autorskich.</p>
+            <p class="lang-secondary">Несанкціоноване використання будь-якої частини сайту є порушенням авторських прав.</p>
+            
+            <p class="lang-primary">Naruszający mogą zostać pociągnięci do odpowiedzialności prawnej.</p>
+            <p class="lang-secondary">Порушник може бути притягнутий до юридичної відповідальності.</p>
+        </div>
+
+        <h2>6. Pierwszeństwo językowe <span class="h2-sub">/ Пріоритет мови</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">W przypadku jakichkolwiek rozbieżności pomiędzy wersjami językowymi — prawnie wiążąca jest wersja polska.</p>
+            <p class="lang-secondary">У випадку будь-яких розбіжностей між двома мовними версіями — польська версія має пріоритетну юридичну силу.</p>
+        </div>
+
+        <h2>7. Projekt graficzny i kod źródłowy <span class="h2-sub">/ Дизайн та код</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Całość projektu graficznego serwisu, w tym design każdej podstrony, układ, kompozycja elementów, struktura wizualna, rozwiązania UX/UI, a także cały kod źródłowy (HTML, CSS, JavaScript oraz inne pliki) znajdujące się w niniejszym repozytorium GitHub i/lub wykorzystywane do działania strony, stanowią rezultat autorskiej działalności intelektualnej i należą wyłącznie do autora — NicholaStas.</p>
+            <p class="lang-secondary">Увесь дизайн вебсайту, включно з дизайном кожної окремої сторінки, макетами, композицією елементів, візуальною структурою, UX/UI-рішеннями, а також увесь програмний код (HTML, CSS, JavaScript та інші файли), що розміщені в цьому GitHub-репозиторії та/або використовуються для роботи сайту, є результатом авторської інтелектуальної діяльності та належать виключно автору — NicholaStas.</p>
+            
+            <p class="lang-primary">Autor jest jedynym, niezmiennym twórcą i właścicielem praw do wskazanych materiałów. Jakiekolwiek kopiowanie, modyfikowanie, adaptowanie, ponowne wykorzystanie, rozpowszechnianie lub tworzenie utworów zależnych bez pisemnej zgody autora jest zabronione.</p>
+            <p class="lang-secondary">Автор є єдиним, незмінним правовласником і автором зазначених матеріалів. Будь-яке копіювання, модифікація, адаптація, повторне використання, розповсюдження або створення похідних робіт без письмового дозволу автора заборонене.</p>
+        </div>
+
+        <h2>8. Repozytorium GitHub <span class="h2-sub">/ GitHub Repository</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Każdy plik, katalog, fragment kodu, struktura projektu, pliki konfiguracyjne oraz zasoby znajdujące się w niniejszym repozytorium GitHub stanowią przedmiot ochrony prawnoautorskiej. Autorem i jedynym właścicielem praw do wszystkich materiałów w repozytorium jest NicholaStas, o ile wyraźnie nie wskazano inaczej.</p>
+            <p class="lang-secondary">Кожен файл, каталог, фрагмент коду, структура проєкту, конфігураційні файли та ресурси, що містяться в цьому GitHub-репозиторії, є об’єктами авторського права. Автором і єдиним правовласником усіх матеріалів у репозиторії є NicholaStas, якщо прямо не зазначено інше.</p>
+
+            <p class="lang-primary">Udostępnienie repozytorium w trybie publicznym nie oznacza udzielenia jakiejkolwiek licencji ani przeniesienia praw.</p>
+            <p class="lang-secondary">Факт відкритого доступу до репозиторію не означає передачу будь-яких прав, ліцензій або дозволів на використання.</p>
+        </div>
+
+        <h2>9. Zakres obowiązywania <span class="h2-sub">/ Дія ліцензії</span></h2>
+        <div class="text-block">
+            <p class="lang-primary">Niniejsza licencja ma zastosowanie do wszystkich materiałów projektu, niezależnie od daty ich utworzenia lub publikacji.</p>
+            <p class="lang-secondary">Ця ліцензія застосовується до всіх матеріалів проєкту, незалежно від дати їх створення або публікації.</p>
+        </div>
+
+        <div class="note-box">
+            <p style="margin-bottom:8px; font-weight:600; color:#333;">Informacja dotycząca zdjęć:</p>
+            <p class="lang-primary">Prawa do zdjęć ofert pracy i miejsc pracy przysługują NicholaStas, natomiast prawa do zdjęć zakwaterowania — firmie Profil Jobs, o ile nie wskazano inaczej.</p>
+            <div style="margin-top:12px; border-top:1px solid #eee; padding-top:12px;">
+                <p style="margin-bottom:8px; font-weight:600; color:#555; font-size:0.95em;">Інформація щодо фотографій:</p>
+                <p class="lang-secondary" style="border:none; padding:0;">Права на фотографії вакансій і робочих місць належать NicholaStas, а права на фотографії житла — компанії Profil Jobs, якщо не зазначено інше.</p>
+            </div>
+        </div>
+
+        <footer class="legal-footer">
+            <p>&copy; 2025 NicholaStas. Wszelkie prawa zastrzeżone.</p>
+            <div class="footer-repo-note">
+                <p>Projekt, kod i struktura repozytorium © NicholaStas. Wszelkie prawa zastrzeżone.</p>
+                <p>Дизайн, код та зміст репозиторію © NicholaStas. Всі права захищено.</p>
+            </div>
+        </footer>
+
+    </article>
+
+</body>
+</html>
