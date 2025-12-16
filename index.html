@@ -36,7 +36,7 @@
             
             /* Navbar Variables */
             --burger-color: #D32F2F;
-            --navbar-height: 62.08px; /* Оновлено згідно navbar.html */
+            --navbar-height: 62.08px;
             --trans-speed: 0.3s;
         }
 
@@ -45,7 +45,7 @@
         .container { max-width: 1120px; margin: 0 auto; padding: 0 50px; }
 
         /* =========================================
-           НОВИЙ NAVBAR (З navbar.html)
+           NAVBAR (З navbar.html)
            ========================================= */
         .navbar { 
             position: fixed; top: 0; left: 0; width: 100%;
@@ -59,7 +59,6 @@
         /* ФОН СМУЖКИ (ОКРЕМИЙ ШАР ::BEFORE) */
         .navbar::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
-            /* СТАН 1: Верх сторінки - Суцільний білий */
             background: rgba(255, 255, 255, 1);
             backdrop-filter: none; -webkit-backdrop-filter: none;
             transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.3s ease;
@@ -81,7 +80,7 @@
             margin: 0 auto; padding: 0 25px; position: relative;
         }
 
-        /* ЛОГОТИП */
+        /* Логотип */
         .logo { 
             font-family: 'Playfair Display', serif; font-size: 28.8px; line-height: 1;
             color: var(--primary); text-decoration: none; font-weight: 700; 
@@ -89,7 +88,7 @@
         }
         .logo::after { content: '®'; font-size: 0.6em; vertical-align: super; margin-left: 2px; font-weight: 700; }
 
-        /* ПОСИЛАННЯ (DESKTOP) */
+        /* Меню посилань */
         .nav-links { display: flex; gap: 12px; align-items: center; height: 100%; }
 
         .nav-links a { 
@@ -111,7 +110,7 @@
         @media (max-width: 768px) {
             .logo { font-size: 24px; }
             
-            /* Гамбургер */
+            /* Кнопка Гамбургер */
             .hamburger {
                 display: flex; flex-direction: column; justify-content: center; align-items: center;
                 gap: 5px; width: 42px; height: 38px; border: 1px solid var(--primary);
@@ -127,21 +126,16 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-            /* ВИПАДАЮЧЕ МЕНЮ */
+            /* Випадаюче меню */
             .nav-links {
                 position: fixed; 
                 top: var(--navbar-height); left: 0; width: 100%; height: auto;
-                
-                /* ✅ ФОН: ЧИСТЕ СКЛО 0.15 (Без муті) */
                 background: rgba(255, 255, 255, 0.15); 
-                
                 backdrop-filter: blur(8px) saturate(160%) contrast(108%);
                 -webkit-backdrop-filter: blur(8px) saturate(160%) contrast(108%);
-
                 border-top: 1px solid rgba(255,255,255,0.3);
                 box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-
-                display: flex; /* Повертаємо display flex */
+                display: flex; 
                 flex-direction: column; 
                 align-items: center;
                 padding: 30px 0 45px 0; 
@@ -287,39 +281,117 @@
         .form-group input { width: 100%; padding: 12px 40px 12px 12px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f1f3f5; font-size: 14px; transition: all 0.3s; }
         .form-group input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(0,168,181,0.2); }
         .input-icon { position: absolute; right: 12px; top: 38px; color: var(--secondary); opacity: 0.7; font-size: 14px; }
-        .submit-btn { width: 100%; padding: 14px; background: linear-gradient(90deg,#1e4a6e,#00a8b5); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.5s; box-shadow: 0 5px 15px rgba(0,119,182,0.3); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        
+        /* UPDATED: Slightly Smaller Font & Icon */
+        .submit-btn { 
+            width: 100%; padding: 14px; background: linear-gradient(90deg,#1e4a6e,#00a8b5); 
+            color: white; border: none; border-radius: 8px; font-weight: 600; 
+            cursor: pointer; transition: all 0.5s; box-shadow: 0 5px 15px rgba(0,119,182,0.3); 
+            position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; /* Reduced from 16px */
+        }
         .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,119,182,0.4); }
-        .icon-animate { margin-left: 10px; font-size: 12px; transition: transform 0.3s ease; }
+        
+        /* UPDATED: Slightly Smaller Icon */
+        .icon-animate { 
+            margin-left: 10px; 
+            font-size: 13px; /* Reduced from 15px */
+            transition: transform 0.3s ease; 
+        }
         .submit-btn:hover .icon-animate { transform: translateX(3px); }
         .brand-signature { position: absolute; bottom: 12px; right: 15px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 14px; color: var(--primary); letter-spacing: 0.8px; }
 
-        .iphone-widget-wrapper { display: flex; justify-content: center; width: 100%; padding: 40px 0; overflow: visible; }
-        .iphone-15-pro { --width: 260px; --height: 535px; --corner-radius: 44px; --base-teal: #2a5a66; --dark-teal: #1a3b42; --light-teal: #538d9c; --shine-teal: #82c2d1; position: relative; width: var(--width); height: var(--height); z-index: 10; box-shadow: 0 20px 50px rgba(26, 60, 94, 0.25); border-radius: var(--corner-radius); }
-        .shadow-layer { position: absolute; z-index: -1; top: 40px; left: 20px; right: 20px; bottom: -30px; background: rgba(0, 20, 30, 0.5); filter: blur(60px); opacity: 0.7; border-radius: 40px; }
-        .chassis { position: absolute; inset: 0; border-radius: var(--corner-radius); background: linear-gradient(135deg, var(--dark-teal) 0%, var(--base-teal) 20%, var(--shine-teal) 40%, var(--base-teal) 60%, var(--dark-teal) 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), inset -1px -1px 2px rgba(0,0,0,0.3); z-index: 2; }
-        .chassis::after { content: ''; position: absolute; inset: 2px; border-radius: 52px; background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.2) 100%); pointer-events: none; }
+        /* =========================================
+           IPHONE WIDGET (NEW)
+           ========================================= */
+        .iphone-widget-wrapper {
+            display: flex; flex-direction: column; align-items: center; gap: 25px;
+            justify-content: center; width: 100%; padding: 40px 0;
+            font-family: 'Inter', sans-serif; overflow: visible;
+        }
+        .iphone-widget-title {
+            font-family: 'Montserrat', sans-serif; color: #1a3c5e; font-size: 1.4rem;
+            font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+            margin: 0; text-align: center;
+        }
+        .iphone-15-pro {
+            --width: 260px; --height: 535px; --corner: 44px;
+            --teal-dk: #1a3b42; --teal-base: #2a5a66; --teal-lt: #538d9c; --teal-shine: #82c2d1;
+            position: relative; width: var(--width); height: var(--height); z-index: 10;
+            box-shadow: 0 20px 50px rgba(26, 60, 94, 0.25); border-radius: var(--corner); margin: 0 auto;
+        }
+        .shadow-layer {
+            position: absolute; inset: 40px 20px -30px 20px; z-index: -1;
+            background: rgba(0, 20, 30, 0.5); filter: blur(60px); opacity: 0.7; border-radius: 40px;
+        }
+        .chassis {
+            position: absolute; inset: 0; border-radius: var(--corner); z-index: 2;
+            background: linear-gradient(135deg, var(--teal-dk) 0%, var(--teal-base) 20%, var(--teal-shine) 40%, var(--teal-base) 60%, var(--teal-dk) 100%);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), inset -1px -1px 2px rgba(0,0,0,0.3);
+        }
+        .chassis::after {
+            content: ''; position: absolute; inset: 2px; border-radius: 52px; pointer-events: none;
+            background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.2) 100%);
+        }
         .antenna { position: absolute; background: rgba(0,0,0,0.25); z-index: 3; height: 2px; left: 1px; right: 1px; }
         .antenna.top { top: 85px; } .antenna.bottom { bottom: 85px; }
-        .btn { position: absolute; background: linear-gradient(to right, var(--dark-teal), var(--base-teal)); border-radius: 2px; z-index: 1; box-shadow: inset -1px 0 1px rgba(255,255,255,0.3), 2px 4px 6px rgba(0,0,0,0.2); }
-        .btn.action { top: 110px; left: -4px; width: 4px; height: 24px; border-radius: 4px 0 0 4px; }
-        .btn.vol-up { top: 160px; left: -4px; width: 4px; height: 50px; border-radius: 4px 0 0 4px; }
-        .btn.vol-down { top: 225px; left: -4px; width: 4px; height: 50px; border-radius: 4px 0 0 4px; }
-        .btn.power { top: 190px; right: -4px; width: 4px; height: 80px; border-radius: 0 4px 4px 0; background: linear-gradient(to left, var(--dark-teal), var(--base-teal)); }
-        .bezel { position: absolute; top: 3px; bottom: 3px; left: 3px; right: 3px; background: #050505; border-radius: 40px; z-index: 4; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); overflow: hidden; }
-        .screen { position: absolute; top: 9px; bottom: 9px; left: 9px; right: 9px; border-radius: 34px; background: #000; overflow: hidden; z-index: 5; cursor: grab; }
+        .btn {
+            position: absolute; background: linear-gradient(to right, var(--teal-dk), var(--teal-base));
+            border-radius: 2px; z-index: 1; width: 4px;
+            box-shadow: inset -1px 0 1px rgba(255,255,255,0.3), 2px 4px 6px rgba(0,0,0,0.2);
+        }
+        .btn.left { left: -4px; border-radius: 4px 0 0 4px; }
+        .btn.action { top: 110px; height: 24px; }
+        .btn.vol-up { top: 160px; height: 50px; }
+        .btn.vol-down { top: 225px; height: 50px; }
+        .btn.power { top: 190px; right: -4px; height: 80px; border-radius: 0 4px 4px 0; background: linear-gradient(to left, var(--teal-dk), var(--teal-base)); }
+        .bezel {
+            position: absolute; inset: 3px; background: #050505; border-radius: 40px; z-index: 4;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); overflow: hidden;
+        }
+        .screen {
+            position: absolute; inset: 9px; border-radius: 34px; background: #000;
+            overflow: hidden; z-index: 5; cursor: grab;
+        }
         .screen:active { cursor: grabbing; }
-        .gallery-container-phone { width: 100%; height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+        /* 
+           ВАЖЛИВО: scroll-snap для "послайдового" прокручування.
+           Користувач не зможе прокрутити список повністю одним рухом.
+        */
+        .gallery-container-phone {
+            width: 100%; height: 100%; overflow-y: auto; 
+            scroll-snap-type: y mandatory; /* Обов'язкова прив'язка */
+            scroll-behavior: smooth; 
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
         .gallery-container-phone::-webkit-scrollbar { display: none; }
-        .gallery-container-phone.active { scroll-snap-type: none; scroll-behavior: auto; }
-        .gallery-item { width: 100%; height: 100%; scroll-snap-align: start; position: relative; flex-shrink: 0; }
+        
+        .gallery-item { 
+            width: 100%; height: 100%; 
+            scroll-snap-align: start; /* Зупинка на початку елемента */
+            flex-shrink: 0; 
+        }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; filter: brightness(0.95); }
         .cta-container { position: absolute; bottom: 40px; left: 0; right: 0; display: flex; justify-content: center; z-index: 30; pointer-events: none; }
-        .tiktok-btn { pointer-events: auto; display: flex; align-items: center; gap: 10px; background: rgba(20, 20, 20, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15); color: white; padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .tiktok-btn {
+            pointer-events: auto; display: flex; align-items: center; gap: 10px;
+            background: rgba(20, 20, 20, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15); color: white; padding: 12px 24px;
+            border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
         .tiktok-btn:hover { background: rgba(20, 20, 20, 0.85); transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(0,0,0,0.6); border-color: rgba(255, 255, 255, 0.3); }
         .tiktok-btn:active { transform: scale(0.96); }
         .tiktok-icon { width: 16px; height: 16px; fill: white; }
-        .dynamic-island { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; background: #000; border-radius: 20px; z-index: 40; }
-        .camera-lens { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: #0d0d0d; border-radius: 50%; box-shadow: inset 1px 1px 3px rgba(20, 40, 80, 0.8); }
+        .dynamic-island {
+            position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
+            width: 96px; height: 28px; background: #000; border-radius: 20px; z-index: 40;
+        }
+        .camera-lens {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 8px; height: 8px; background: #0d0d0d; border-radius: 50%;
+            box-shadow: inset 1px 1px 3px rgba(20, 40, 80, 0.8);
+        }
 
         .why-us-section { padding: 80px 0; background: var(--background); }
         .premium-heading, .section-title, .contact-section h2 { 
@@ -507,8 +579,17 @@
             .big-white-container { padding: 25px 15px; margin: 30px 0 0 0; }
             .cta-bottom-block { flex-direction: column; gap: 15px; }
             .cta-text-wrapper, .cta-bottom-block .apply-btn-modern { width: 100%; max-width: 320px; }
-            .iphone-widget-wrapper { padding: 20px 0; overflow-x: hidden; }
+            
+            /* iPhone Widget Mobile Fixes */
+            .iphone-widget-wrapper { 
+                padding: 20px 0; 
+                overflow-x: hidden;
+            }
             .iphone-15-pro { margin: 0 auto; }
+            
+            /* Scroll fix for gallery on mobile (Snap Scroll) */
+            .gallery-container-phone { scroll-snap-stop: always; }
+
             .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; padding: 0 20px; }
             .footer-bottom-links a { margin: 0 10px; }
         }
@@ -726,14 +807,18 @@
                 <div class="brand-footer"><strong>PROFIL JOBS®</strong> - професійні рішення для вашої кар’єри</div>
             </div>
 
-            <!-- IPHONE WIDGET -->
-            <div class="iphone-widget-wrapper" style="margin-top:0; flex-direction: column; align-items: center; gap: 25px;">
-                <h3 style="font-family: 'Montserrat', sans-serif; color: var(--primary); font-size: 1.4rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 0; position: relative; display: inline-block;">Ми у TikTok</h3>
+            <!-- IPHONE WIDGET (UPDATED) -->
+            <div class="iphone-widget-wrapper">
+                <h3 class="iphone-widget-title">Ми у TikTok</h3>
                 <div class="iphone-15-pro">
-                    <div class="shadow-layer"></div><div class="chassis"></div><div class="btn action"></div><div class="btn vol-up"></div><div class="btn vol-down"></div><div class="btn power"></div><div class="antenna top"></div><div class="antenna bottom"></div>
+                    <div class="shadow-layer"></div>
+                    <div class="chassis"></div>
+                    <div class="btn left action"></div><div class="btn left vol-up"></div><div class="btn left vol-down"></div><div class="btn power"></div>
+                    <div class="antenna top"></div><div class="antenna bottom"></div>
+                    
                     <div class="bezel">
                         <div class="cta-container">
-                            <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" rel="noopener noreferrer" class="tiktok-btn">
+                            <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="tiktok-btn">
                                 <svg class="tiktok-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a90.25,90.25,0,1,0,43.7,77.79V83h87.08A122.91,122.91,0,0,0,448,209.91Z"/></svg>
                                 Відкрити TikTok
                             </a>
@@ -1058,19 +1143,6 @@
             });
             calculateSalary();
 
-            // PHONE SLIDER
-            const phoneSlider = document.getElementById('gallery-phone');
-            if(phoneSlider) {
-                setInterval(() => {
-                    const h = phoneSlider.clientHeight;
-                    if(phoneSlider.scrollTop + h >= phoneSlider.scrollHeight - 10) {
-                        phoneSlider.scrollTo({top:0, behavior:'smooth'});
-                    } else {
-                        phoneSlider.scrollBy({top: h, behavior:'smooth'});
-                    }
-                }, 3000);
-            }
-
             // TESTIMONIALS
             const reviewTrack = document.querySelector('.testimonials-track');
             const reviews = document.querySelectorAll('.review-card');
@@ -1111,39 +1183,77 @@
                 backToTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
 
-            // GOOGLE DRIVE IMAGES
-            async function loadDriveImages() {
-                const apiKey = 'AIzaSyCJkTASOzVjPBboGFOkTU1nfMRD-iUuaF0';
-                const folderId = '1ZOrUJ64ntSCeFh8ze7d86Iu6pghye023';
-                const galleryContainer = document.getElementById('gallery-phone');
-                if(!galleryContainer) return;
-
-                const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'+and+trashed=false&fields=files(id,thumbnailLink)&key=${apiKey}`;
-
+            // =========================================
+            // IPHONE WIDGET LOGIC (UPDATED)
+            // =========================================
+            // Shared Drive Fetch Logic
+            const API_KEY = 'AIzaSyCJkTASOzVjPBboGFOkTU1nfMRD-iUuaF0';
+            const fetchDriveFiles = async (folderId) => {
                 try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    if (data.files && data.files.length > 0) {
-                        galleryContainer.innerHTML = '';
-                        data.files.forEach(file => {
-                            if (file.thumbnailLink) {
-                                const largeImageLink = file.thumbnailLink.replace(/=s\d+$/, '=s1000');
+                    const res = await fetch(`https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'+and+trashed=false&fields=files(id,name,thumbnailLink)&orderBy=name&key=${API_KEY}`);
+                    const data = await res.json();
+                    return data.files || [];
+                } catch (e) { console.error("Drive API Error:", e); return []; }
+            };
+
+            const phoneSlider = document.getElementById('gallery-phone');
+            if (phoneSlider) {
+                let autoScrollInterval;
+
+                // Stop function: clears interval and removes listeners ONLY ON MOBILE
+                const stopAutoScroll = () => {
+                    if (window.innerWidth <= 768) { // Only stop on mobile
+                        if (autoScrollInterval) {
+                            clearInterval(autoScrollInterval);
+                            autoScrollInterval = null;
+                            // Once stopped by interaction, remove listeners so they don't fire again
+                            phoneSlider.removeEventListener('touchstart', stopAutoScroll);
+                            phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
+                            phoneSlider.removeEventListener('wheel', stopAutoScroll);
+                        }
+                    }
+                };
+
+                // Add listeners for user interaction to stop auto-scroll PERMANENTLY (mobile only)
+                phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
+                phoneSlider.addEventListener('pointerdown', stopAutoScroll);
+                phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
+
+                // Function to start scrolling
+                const startAutoScroll = () => {
+                    autoScrollInterval = setInterval(() => {
+                        const { scrollTop, scrollHeight, clientHeight } = phoneSlider;
+                        // Logic to prevent black screen: if at bottom, jump to top
+                        if (scrollTop + clientHeight >= scrollHeight - 10) {
+                            phoneSlider.scrollTo({ top: 0, behavior: 'smooth' });
+                        } else {
+                            phoneSlider.scrollBy({ top: clientHeight, behavior: 'smooth' });
+                        }
+                    }, 3000);
+                };
+
+                // Fetch and Populate Dynamically
+                fetchDriveFiles('1ZOrUJ64ntSCeFh8ze7d86Iu6pghye023').then(files => {
+                    if (files.length) {
+                        // Clear any existing placeholders
+                        phoneSlider.innerHTML = '';
+                        
+                        const fragment = document.createDocumentFragment();
+                        files.forEach(f => {
+                            if (f.thumbnailLink) {
                                 const div = document.createElement('div');
                                 div.className = 'gallery-item';
-                                const img = document.createElement('img');
-                                img.src = largeImageLink;
-                                img.alt = 'Drive Image';
-                                img.loading = "lazy";
-                                div.appendChild(img);
-                                galleryContainer.appendChild(div);
+                                div.innerHTML = `<img src="${f.thumbnailLink.replace(/=s\d+$/, '=s1000')}" alt="TikTok Preview" loading="lazy">`;
+                                fragment.appendChild(div);
                             }
                         });
+                        phoneSlider.appendChild(fragment);
+                        
+                        // Start auto-scroll ONLY after content is loaded
+                        startAutoScroll();
                     }
-                } catch (error) {
-                    console.error('Error loading images:', error);
-                }
+                });
             }
-            loadDriveImages();
         });
     </script>
 </body>
