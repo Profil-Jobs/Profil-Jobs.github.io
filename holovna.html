@@ -36,7 +36,7 @@
             
             /* Navbar Variables */
             --burger-color: #D32F2F;
-            --navbar-height: 62px;
+            --navbar-height: 62.08px; /* Оновлено згідно navbar.html */
             --trans-speed: 0.3s;
         }
 
@@ -45,85 +45,60 @@
         .container { max-width: 1120px; margin: 0 auto; padding: 0 50px; }
 
         /* =========================================
-           NAVBAR
+           НОВИЙ NAVBAR (З navbar.html)
            ========================================= */
         .navbar { 
-            position: fixed; 
-            top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 1); 
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: transparent; 
+            box-shadow: none; border-bottom: 1px solid transparent;
             z-index: 1000; 
-            transition: background var(--trans-speed) ease, box-shadow var(--trans-speed) ease, transform var(--trans-speed) ease;
-            will-change: transform, background-color;
+            transition: transform 0.3s ease;
+            isolation: isolate; 
         }
 
-        /* Стиль при скролі */
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(10px) saturate(160%); 
-            -webkit-backdrop-filter: blur(10px) saturate(160%);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        /* ФОН СМУЖКИ (ОКРЕМИЙ ШАР ::BEFORE) */
+        .navbar::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
+            /* СТАН 1: Верх сторінки - Суцільний білий */
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: none; -webkit-backdrop-filter: none;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        /* СТАН 2: При скролі - Біла муть 0.79 */
+        .navbar.scrolled::before {
+            background: rgba(255, 255, 255, 0.79); 
+            backdrop-filter: blur(11px) saturate(160%); 
+            -webkit-backdrop-filter: blur(11px) saturate(160%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        /* Стиль при відкритому мобільному меню */
-        .navbar.mobile-open {
-    	 background: rgba(255, 255, 255, 0.7);
-   	 backdrop-filter: blur(10px) saturate(160%);
-    	-webkit-backdrop-filter: blur(10px) saturate(160%);
-   	 box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-   	 border-bottom: 1px solid rgba(255,255,255,0.4);
-	}
-
-        /* Прихований навбар */
-        .navbar.nav-hidden {
-            transform: translateY(-100%);
-            box-shadow: none;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .nav-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;            
-            height: var(--navbar-height);
-            width: 100%;        
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 25px;                
+            display: flex; justify-content: space-between; align-items: center;            
+            height: var(--navbar-height); width: 100%; max-width: 1320px;
+            margin: 0 auto; padding: 0 25px; position: relative;
         }
 
-        /* Логотип */
+        /* ЛОГОТИП */
         .logo { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 28px; 
-            line-height: 1;
-            color: var(--primary); 
-            text-decoration: none; 
-            font-weight: 700; 
-            flex-shrink: 0; 
-            margin-right: auto;
+            font-family: 'Playfair Display', serif; font-size: 28.8px; line-height: 1;
+            color: var(--primary); text-decoration: none; font-weight: 700; 
+            z-index: 1002; flex-shrink: 0; margin-right: auto; display: inline-block; 
         }
         .logo::after { content: '®'; font-size: 0.6em; vertical-align: super; margin-left: 2px; font-weight: 700; }
 
-        /* Меню посилань */
+        /* ПОСИЛАННЯ (DESKTOP) */
         .nav-links { display: flex; gap: 12px; align-items: center; height: 100%; }
 
         .nav-links a { 
-            height: 38px; 
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 18px; 
-            background: var(--gradient); 
-            color: white; 
-            text-decoration: none; 
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 500; 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            border-radius: 50px; 
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 37.75px; display: inline-flex; align-items: center; justify-content: center;
+            padding: 0 18px; background: var(--gradient); color: white; 
+            text-decoration: none; font-family: 'Montserrat', sans-serif; 
+            font-weight: 500; font-size: 0.85rem; text-transform: uppercase; 
+            border-radius: 50px; transition: all 0.3s ease; white-space: nowrap;
         }
-
         .nav-links a:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,168,181,0.3); }
 
         .hamburger { display: none; }
@@ -136,19 +111,15 @@
         @media (max-width: 768px) {
             .logo { font-size: 24px; }
             
-            /* Кнопка Гамбургер */
+            /* Гамбургер */
             .hamburger {
                 display: flex; flex-direction: column; justify-content: center; align-items: center;
-                gap: 5px; width: 44px; height: 44px;
-                border: 1px solid var(--primary);
-                border-radius: 8px; background: transparent; cursor: pointer;
-                z-index: 1003; transition: border-color 0.3s ease; margin: 0;
+                gap: 5px; width: 42px; height: 38px; border: 1px solid var(--primary);
+                border-radius: 8px; padding: 0; background: transparent; cursor: pointer;
+                z-index: 1003; transition: all 0.3s ease;
+                margin: 0;
             }
-            .hamburger span { 
-                display: block; width: 20px; height: 2px; 
-                background-color: var(--primary); border-radius: 2px; 
-                transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; 
-            }
+            .hamburger span { display: block; width: 20px; height: 2px; background-color: var(--primary); border-radius: 2px; transition: all 0.3s ease; }
             
             .hamburger.active { border-color: var(--burger-color); }
             .hamburger.active span { background-color: var(--burger-color); }
@@ -156,49 +127,37 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-            /* Випадаюче меню */
+            /* ВИПАДАЮЧЕ МЕНЮ */
             .nav-links {
-                 position: absolute;
-    		 top: var(--navbar-height);
-    		 left: 0;
-    		 width: 100%;
-    		 height: auto;
+                position: fixed; 
+                top: var(--navbar-height); left: 0; width: 100%; height: auto;
+                
+                /* ✅ ФОН: ЧИСТЕ СКЛО 0.15 (Без муті) */
+                background: rgba(255, 255, 255, 0.15); 
+                
+                backdrop-filter: blur(8px) saturate(160%) contrast(108%);
+                -webkit-backdrop-filter: blur(8px) saturate(160%) contrast(108%);
 
-    		 background: rgba(255, 255, 255, 0.95);
-     		 backdrop-filter: blur(15px) saturate(180%);
-     		 -webkit-backdrop-filter: blur(15px) saturate(180%);
+                border-top: 1px solid rgba(255,255,255,0.3);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 
-    		 display: flex;
-      		 flex-direction: column;
-    		 align-items: center; /* Центрування кнопок по горизонталі */
-
-    		 padding: 25px 0;
-     		 border-top: 1px solid #f0f0f0;
-    		 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-
-    		 opacity: 0;
-    		 visibility: hidden;
-      		 transform: translateY(-10px);
-    		 transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-
-     		 z-index: 1001;
-     		 pointer-events: none;
+                display: flex; /* Повертаємо display flex */
+                flex-direction: column; 
+                align-items: center;
+                padding: 30px 0 45px 0; 
+                opacity: 0; visibility: hidden; transform: translateY(-10px);
+                transition: all 0.3s ease; 
+                z-index: 1001; pointer-events: none;
             }
             
             .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
             
-            /* === ВИПРАВЛЕНО: Фіксована ширина кнопок на мобільних === */
-            .nav-links a { 
-                width: 180px !important;       /* Фіксована ширина */
-                min-width: 180px !important;   /* Заборона зменшення */
-                max-width: 180px !important;   /* Заборона збільшення */
-                margin: 8px 0; 
-                padding: 0;                    /* Текст центрується через flex */
-                height: 41.76px;                  
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-sizing: border-box;
+            .nav-links a {
+                width: auto !important; min-width: 180px !important; max-width: 250px !important; text-align: center;
+                padding: 12px 0; margin: 6px 0; 
+                background: var(--gradient); color: white; border: none;
+                box-shadow: 0 4px 15px rgba(0, 168, 181, 0.3); height: auto;
+                display: flex; 
             }
         }
 
@@ -561,17 +520,15 @@
             .partners-block { margin-top: 20px; }
             .logos-flex { gap: 25px; }
             .gray-logo { max-height: 45px !important; }
-            /* Навмисно не додаємо специфічні стилі для .nav-links a тут,
-               щоб вони успадкували фіксовану ширину з media 768px */
         }
     </style>
 </head>
 <body>
 
-    <!-- === NEW CLEAN NAVBAR === -->
+    <!-- === NEW CLEAN NAVBAR (FROM NAVBAR.HTML) === -->
     <nav class="navbar" id="main-navbar">
         <div class="nav-content">
-            <a href="holovna.html" class="logo" aria-label="Profil Jobs - Головна">PROFIL JOBS</a>
+            <a href="holovna.html" class="logo">PROFIL JOBS</a>
             
             <div class="nav-links" id="nav-links">
                 <a href="holovna.html">Головна</a>
@@ -580,10 +537,9 @@
                 <a href="kontakty.html">Контакти</a>
             </div>
 
-            <!-- Додано aria-атрибути для доступності -->
-            <button class="hamburger" id="hamburger-btn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="nav-links">
+            <div class="hamburger" id="hamburger-btn">
                 <span></span><span></span><span></span>
-            </button>
+            </div>
         </div>
     </nav>
 
@@ -965,7 +921,7 @@
                 <a href="polityka-konfidentsiynosti.html">Політика конфіденційності</a>
                 <a href="umovy-vykorystannya.html">Умови використання</a>
                 <a href="cookies.html">Cookies</a>
-                <a href="litsenziya.html">license.html</a>
+                <a href="license.html">Ліцензія</a>
             </div>
             <div class="footer-contact-row">
                 <span><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
@@ -990,100 +946,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // =========================================
-            // 1. UPDATED NAVBAR LOGIC
+            // 1. UPDATED NAVBAR LOGIC (FROM NAVBAR.HTML)
             // =========================================
             const navbar = document.getElementById('main-navbar');
             const hamburger = document.getElementById('hamburger-btn');
             const navLinks = document.getElementById('nav-links');
 
-            // --- Toggle Menu Logic ---
-            function toggleMenu() {
-                const isActive = navLinks.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                navbar.classList.toggle('mobile-open');
-                
-                // Update ARIA for accessibility
-                hamburger.setAttribute('aria-expanded', isActive);
-            }
-
-            function closeMenu() {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    navbar.classList.remove('mobile-open');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                }
-            }
-
+            // --- МЕНЮ БУРГЕР ---
             if (hamburger && navLinks) {
-                hamburger.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevents accidental closes if nested
-                    toggleMenu();
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
                 });
-
-                // Close when clicking a link
                 navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', closeMenu);
-                });
-
-                // Close when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (navLinks.classList.contains('active') && 
-                        !navLinks.contains(e.target) && 
-                        !hamburger.contains(e.target)) {
-                        closeMenu();
-                    }
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    });
                 });
             }
 
-            // --- Optimized Scroll Logic (RequestAnimationFrame) ---
-            let lastScrollTop = 0;
-            let ticking = false; // Throttling flag
-            const delta = 5;
-            const threshold = 10;
-
-            function updateNavbar() {
-                // If menu is open, do not change classes (prevents visual glitches)
-                if (navbar.classList.contains('mobile-open')) {
-                    ticking = false;
-                    return;
-                }
-
+            // --- ЛОГІКА СКРОЛУ ---
+            window.addEventListener('scroll', function() {
                 const st = window.pageYOffset || document.documentElement.scrollTop;
-
-                // Glass effect (scrolled)
-                if (st > threshold) {
-                    if (!navbar.classList.contains('scrolled')) navbar.classList.add('scrolled');
+                // Додаємо ефект "білої муті" (0.79) при скролі
+                if (st > 10) {
+                    navbar.classList.add('scrolled');
                 } else {
-                    if (navbar.classList.contains('scrolled')) navbar.classList.remove('scrolled');
-                }
-
-                // Hide logic (mobile only)
-                if (window.innerWidth <= 768) {
-                    if (Math.abs(lastScrollTop - st) > delta) {
-                        if (st > lastScrollTop && st > navbar.offsetHeight) {
-                            // Scroll down
-                            navbar.classList.add('nav-hidden');
-                        } else {
-                            // Scroll up
-                            if (st + window.innerHeight < document.body.scrollHeight) {
-                                navbar.classList.remove('nav-hidden');
-                            }
-                        }
-                    }
-                } else {
-                    // Always show on desktop
-                    navbar.classList.remove('nav-hidden');
-                }
-
-                lastScrollTop = st;
-                ticking = false;
-            }
-
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateNavbar);
-                    ticking = true;
+                    navbar.classList.remove('scrolled');
                 }
             }, { passive: true });
 
