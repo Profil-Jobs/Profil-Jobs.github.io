@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROFIL JOBS — Головна</title>
     
-    <!-- FONTS -->
+    <!-- FONTS (Preconnected for speed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -34,129 +36,82 @@
             
             /* Navbar Variables */
             --burger-color: #D32F2F;
-            --navbar-height: 62.08px;
+            --navbar-height: 62.08px; /* Оновлено згідно navbar.html */
+            --trans-speed: 0.3s;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-        
-        /* КОНТЕЙНЕР */
-        .container { 
-            max-width: 1120px; 
-            margin: 0 auto; 
-            padding: 0 50px; 
-        }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 50px; }
 
         /* =========================================
-           NAVBAR STYLES (NEW - CLEAN GLASS EFFECT)
+           НОВИЙ NAVBAR (З navbar.html)
            ========================================= */
         .navbar { 
-            position: fixed; 
-            top: 0; 
-            left: 0;
-            width: 100%;
-            
-            /* Стан 1: Спокій (прозорий зверху або білий) */
-            background: rgba(255, 255, 255, 1); 
-            backdrop-filter: none; 
-            -webkit-backdrop-filter: none;
-            box-shadow: none; 
-            border-bottom: 1px solid transparent;
-
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: transparent; 
+            box-shadow: none; border-bottom: 1px solid transparent;
             z-index: 1000; 
-            transition: background 0.4s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
+            isolation: isolate; 
         }
 
-        /* Стан 2: Ефект скла (Clear Glass) при скролі */
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.75);
-            
-            /* Параметри скла */
-            backdrop-filter: blur(10px) saturate(160%); 
-            -webkit-backdrop-filter: blur(10px) saturate(160%);
-            
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        /* ФОН СМУЖКИ (ОКРЕМИЙ ШАР ::BEFORE) */
+        .navbar::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
+            /* СТАН 1: Верх сторінки - Суцільний білий */
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: none; -webkit-backdrop-filter: none;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        /* СТАН 2: При скролі - Біла муть 0.79 */
+        .navbar.scrolled::before {
+            background: rgba(255, 255, 255, 0.79); 
+            backdrop-filter: blur(11px) saturate(160%); 
+            -webkit-backdrop-filter: blur(11px) saturate(160%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .navbar.nav-hidden {
-            transform: translateY(-100%);
-            box-shadow: none;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .nav-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;            
-            height: var(--navbar-height);
-            width: 100%;        
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 25px;                
-            position: relative;
+            display: flex; justify-content: space-between; align-items: center;            
+            height: var(--navbar-height); width: 100%; max-width: 1320px;
+            margin: 0 auto; padding: 0 25px; position: relative;
         }
 
         /* ЛОГОТИП */
         .logo { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 28.8px; 
-            line-height: 1;
-            color: var(--primary); 
-            text-decoration: none; 
-            font-weight: 700; 
-            z-index: 1002;
-            flex-shrink: 0; 
-            margin-right: auto;
-            display: inline-block; 
+            font-family: 'Playfair Display', serif; font-size: 28.8px; line-height: 1;
+            color: var(--primary); text-decoration: none; font-weight: 700; 
+            z-index: 1002; flex-shrink: 0; margin-right: auto; display: inline-block; 
         }
-
-        .logo::after { 
-            content: '®'; 
-            font-size: 0.6em;         
-            vertical-align: super;    
-            margin-left: 2px;         
-            font-weight: 700;
-        }
+        .logo::after { content: '®'; font-size: 0.6em; vertical-align: super; margin-left: 2px; font-weight: 700; }
 
         /* ПОСИЛАННЯ (DESKTOP) */
-        .nav-links { 
-            display: flex; 
-            gap: 12px; 
-            align-items: center;
-            height: 100%;
-        }
+        .nav-links { display: flex; gap: 12px; align-items: center; height: 100%; }
 
         .nav-links a { 
-            height: 37.75px; 
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 18px; 
-            background: var(--gradient); 
-            color: white; 
-            text-decoration: none; 
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 500; 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            border-radius: 50px; 
-            transition: all 0.3s ease;
-            white-space: nowrap;
+            height: 37.75px; display: inline-flex; align-items: center; justify-content: center;
+            padding: 0 18px; background: var(--gradient); color: white; 
+            text-decoration: none; font-family: 'Montserrat', sans-serif; 
+            font-weight: 500; font-size: 0.85rem; text-transform: uppercase; 
+            border-radius: 50px; transition: all 0.3s ease; white-space: nowrap;
         }
+        .nav-links a:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,168,181,0.3); }
 
-        .nav-links a:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 8px 20px rgba(0,168,181,0.3); 
-        }
-
-        /* ГАМБУРГЕР */
         .hamburger { display: none; }
 
         /* NAVBAR MEDIA QUERIES */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .nav-content { padding: 0 20px; }
-            .logo { font-size: 24px; }
+        }
 
+        @media (max-width: 768px) {
+            .logo { font-size: 24px; }
+            
+            /* Гамбургер */
             .hamburger {
                 display: flex; flex-direction: column; justify-content: center; align-items: center;
                 gap: 5px; width: 42px; height: 38px; border: 1px solid var(--primary);
@@ -164,62 +119,55 @@
                 z-index: 1003; transition: all 0.3s ease;
                 margin: 0;
             }
-            .hamburger span {
-                display: block; width: 20px; height: 2px; background-color: var(--primary);
-                border-radius: 2px; transition: all 0.3s ease;
-            }
-
+            .hamburger span { display: block; width: 20px; height: 2px; background-color: var(--primary); border-radius: 2px; transition: all 0.3s ease; }
+            
             .hamburger.active { border-color: var(--burger-color); }
             .hamburger.active span { background-color: var(--burger-color); }
             .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+            /* ВИПАДАЮЧЕ МЕНЮ */
             .nav-links {
-                position: absolute; top: var(--navbar-height); left: 0; width: 100%; height: auto;
+                position: fixed; 
+                top: var(--navbar-height); left: 0; width: 100%; height: auto;
                 
-                background: rgba(255, 255, 255, 0.85); 
-                backdrop-filter: blur(10px) saturate(160%);
-                -webkit-backdrop-filter: blur(10px) saturate(160%);
+                /* ✅ ФОН: ЧИСТЕ СКЛО 0.15 (Без муті) */
+                background: rgba(255, 255, 255, 0.15); 
+                
+                backdrop-filter: blur(8px) saturate(160%) contrast(108%);
+                -webkit-backdrop-filter: blur(8px) saturate(160%) contrast(108%);
 
-                flex-direction: column; padding: 25px 0; border-top: 1px solid #f0f0f0;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                border-top: 1px solid rgba(255,255,255,0.3);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+
+                display: flex; /* Повертаємо display flex */
+                flex-direction: column; 
+                align-items: center;
+                padding: 30px 0 45px 0; 
                 opacity: 0; visibility: hidden; transform: translateY(-10px);
-                transition: all 0.3s ease; z-index: 1001; pointer-events: none;
+                transition: all 0.3s ease; 
+                z-index: 1001; pointer-events: none;
             }
-
-            .nav-links.active {
-                opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
-            }
-
-            /* КНОПКИ НА МОБІЛЬНОМУ (Градієнт) */
+            
+            .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+            
             .nav-links a {
-                width: auto; 
-                min-width: 180px; 
-                max-width: 250px; 
-                text-align: center;
-                padding: 10px 0; 
-                margin: 5px 0; 
-                
-                background: var(--gradient); 
-                color: white;
-                border: none;
-                
-                box-shadow: 0 4px 10px rgba(0, 168, 181, 0.2);
-                height: auto;
+                width: auto !important; min-width: 180px !important; max-width: 250px !important; text-align: center;
+                padding: 12px 0; margin: 6px 0; 
+                background: var(--gradient); color: white; border: none;
+                box-shadow: 0 4px 15px rgba(0, 168, 181, 0.3); height: auto;
+                display: flex; 
             }
         }
 
         /* =========================================
-           2. HERO BLOCK
+           2. HERO & SECTIONS
            ========================================= */
         .premium-hero { 
-            position: relative; 
-            padding: 120px 0 80px; 
+            position: relative; padding: 120px 0 80px; 
             background: radial-gradient(circle at 40% 20%, #eef6ff 0%, #f9fbff 100%);
-            overflow: hidden; 
-            text-align: left; 
-            margin-bottom: 30px; 
+            overflow: hidden; text-align: left; margin-bottom: 30px; 
         }
         .premium-hero::after { content: ""; position: absolute; top: -80px; right: -40px; width: 400px; height: 400px; background: rgba(0, 168, 181, 0.08); border-radius: 50%; filter: blur(60px); z-index: 1; }
         .premium-hero .container { position: relative; z-index: 2; }
@@ -230,192 +178,68 @@
         .hero-actions { opacity: 0; animation: fadeUp 0.8s ease forwards; animation-delay: 0.4s; }
         
         .btn-main { padding: 16px 32px; background: #1a3c5e; color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 12px 25px rgba(26, 60, 94, 0.25); display: inline-block; }
-        .btn-main:hover { 
-            transform: translateY(-3px); 
-            background: var(--prof-green);
-            box-shadow: 0 16px 35px rgba(39, 174, 96, 0.35); 
-        }
-
+        .btn-main:hover { transform: translateY(-3px); background: var(--prof-green); box-shadow: 0 16px 35px rgba(39, 174, 96, 0.35); }
         .btn-outline { padding: 16px 32px; background: transparent; color: #1a3c5e; border: 2px solid rgba(26, 60, 94, 0.15); border-radius: 50px; text-decoration: none; font-weight: 600; margin-left: 15px; transition: all 0.3s; display: inline-block; }
         .btn-outline:hover { border-color: #1a3c5e; background: rgba(26, 60, 94, 0.05); }
         @keyframes fadeUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* AGENCY INFO BLOCK */
         .agency-info-container { display: flex; align-items: center; gap: 30px; margin-top: 20px; margin-bottom: 40px; flex-wrap: wrap; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; }
         .agency-info-text { flex: 1; font-size: 0.9rem; color: #555; line-height: 1.6; border-left: 4px solid var(--secondary); padding-left: 20px; }
         .agency-info-text strong { color: #1a3c5e; font-weight: 700; display: block; margin-bottom: 5px; font-size: 1.1rem; }
         
-        /* CLOCK */
         .clock-wrapper { flex-shrink: 0; }
         .clock-chip { background: linear-gradient(135deg, #1a3c5e 0%, #00a8b5 100%); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-family: 'Montserrat', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0, 168, 181, 0.25); font-variant-numeric: tabular-nums; width: fit-content; }
         .clock-divider { opacity: 0.4; margin: 0 2px; font-weight: 300; }
         .pulsing-dot { width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); animation: pulse-green 2s infinite; }
         @keyframes pulse-green { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); } }
 
-        /* STATS SECTION */
         .stats-section { padding: 60px 0; background: #fff; border-bottom: 1px solid #f0f0f0; margin-bottom: 40px; }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
         .stat-item h3 { font-size: 3rem; font-weight: 900; color: #1a3c5e; margin-bottom: 5px; line-height: 1; font-family: 'Montserrat', sans-serif; }
         .stat-item h3::after { content: '+'; color: #00a8b5; font-size: 1.5rem; vertical-align: super; }
         .stat-item p { color: #718096; font-size: 1rem; font-weight: 600; line-height: 1.4; }
 
-        /* =========================================
-           3. MAIN LAYOUT & WIDGETS
-           ========================================= */
         .main-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 25px; padding: 0; margin-top: 30px; }
         .interactive-blocks { display: flex; flex-direction: column; gap: 30px; margin-top: 0; width: 100%; }
 
-        /* --- HOT VACANCIES SECTION STYLES --- */
-        .hot-vacancies-section {
-            width: auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 30px;
-            margin: 0 10px 30px 10px;
-            border: 1px solid #E6EEF3;
-        }
-
+        /* HOT VACANCIES */
+        .hot-vacancies-section { width: auto; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); overflow: hidden; font-family: 'Inter', sans-serif; margin-bottom: 30px; margin: 0 10px 30px 10px; border: 1px solid #E6EEF3; }
         .hv-container { display: flex; min-height: auto; }
-
-        /* Line on the left edge */
         .hv-divider { flex: 0 0 5px; background-color: var(--hot-red); height: auto; }
-
-        .hv-content-wrapper { 
-            flex: 1; 
-            padding: 40px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            padding-right: 40px; 
-        }
-
-        /* Центрування заголовка */
-        .hv-header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 25px; 
-        }
+        .hv-content-wrapper { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; padding-right: 40px; }
+        .hv-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .hv-title { font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 800; color: var(--primary); margin: 0; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* Pulse Animation */
         .pulsing-indicator { width: 12px; height: 12px; background-color: var(--hot-red); border-radius: 50%; position: relative; flex-shrink: 0; }
         .pulsing-indicator::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; background-color: rgba(214, 40, 40, 0.6); border-radius: 50%; animation: hv-pulse 2s infinite; }
         @keyframes hv-pulse { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; } }
 
-        /* GRID */
-        .hv-cards-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 15px; 
-            margin-bottom: 35px; 
-        }
-
-        /* WIDE RECTANGULAR CARDS */
-        .hv-card { 
-            background: #f8fafc; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 12px; 
-            padding: 20px 25px; 
-            transition: all 0.3s ease; 
-            display: flex; 
-            flex-direction: row; 
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
+        .hv-cards-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 35px; }
+        .hv-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 25px; transition: all 0.3s ease; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 20px; }
         .hv-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); border-color: var(--hot-red); }
-
         .hv-card-left { flex-grow: 1; }
-        
-        /* SALARY GREEN */
-        .hv-salary { 
-            display: inline-block; 
-            background: rgba(39, 174, 96, 0.1); 
-            color: var(--prof-green); 
-            font-weight: 700; 
-            font-size: 0.85rem; 
-            padding: 4px 12px; 
-            border-radius: 50px; 
-            margin-bottom: 6px; 
-        }
-        
+        .hv-salary { display: inline-block; background: rgba(39, 174, 96, 0.1); color: var(--prof-green); font-weight: 700; font-size: 0.85rem; padding: 4px 12px; border-radius: 50px; margin-bottom: 6px; }
         .hv-position { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0; line-height: 1.3; }
-
-        /* Опис один під одним */
-        .hv-card-details { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 8px; 
-            font-size: 0.85rem; 
-            color: #718096; 
-            margin-top: 10px; 
-        }
+        .hv-card-details { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #718096; margin-top: 10px; }
         .hv-card-details span { display: flex; align-items: center; gap: 8px; }
         .hv-card-details i { width: 16px; color: var(--primary); text-align: center; }
-
-        .hv-card-link { 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            color: var(--primary); 
-            transition: color 0.3s; 
-            white-space: nowrap;
-            padding-left: 15px;
-            border-left: 1px solid #e2e8f0;
-        }
+        .hv-card-link { text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--primary); transition: color 0.3s; white-space: nowrap; padding-left: 15px; border-left: 1px solid #e2e8f0; }
         .hv-card:hover .hv-card-link { color: var(--prof-green); }
+        .hv-actions { display: flex; justify-content: center; margin-top: 10px; }
+        .hv-btn-primary { display: inline-block; background: var(--primary); color: white; padding: 14px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(26, 60, 94, 0.2); }
+        .hv-btn-primary:hover { background: var(--prof-green); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); transform: translateY(-2px); }
 
-        /* CENTERED BUTTON */
-        .hv-actions { 
-            display: flex; 
-            justify-content: center; 
-            margin-top: 10px; 
-        }
-        
-        .hv-btn-primary { 
-            display: inline-block; 
-            background: var(--primary); 
-            color: white; 
-            padding: 14px 40px; 
-            border-radius: 50px; 
-            font-weight: 600; 
-            text-decoration: none; 
-            text-transform: uppercase; 
-            font-size: 0.9rem; 
-            letter-spacing: 0.5px; 
-            transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(26, 60, 94, 0.2); 
-        }
-        
-        /* ЗМІНА: Зелений колір при наведенні */
-        .hv-btn-primary:hover { 
-            background: var(--prof-green); 
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); 
-            transform: translateY(-2px); 
-        }
-
-        /* BIG WHITE BOX */
         .big-white-container { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 40px; margin: 40px 10px 0 10px; width: auto; border: 1px solid rgba(255,255,255,0.3); }
-
-        /* WHY US BLOCK */
         .why-us-block { background: #f0f8ff; border-radius: 12px; padding: 25px; margin: 0 0 25px 0; border-left: 4px solid var(--secondary); }
         .why-us-block h4 { color: var(--primary); margin-bottom: 20px; font-size: 1.2rem; font-weight: 700; }
         .why-list { list-style: none; padding: 0; }
         .why-list li { margin-bottom: 12px; display: flex; align-items: flex-start; font-size: 0.95rem; line-height: 1.5; }
         .why-list li i { color: #27ae60; margin-right: 12px; margin-top: 3px; flex-shrink: 0; }
 
-        /* CERT BLOCK */
         .cert-block { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 25px 0; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
         .cert-item { display: flex; align-items: center; font-size: 0.85rem; color: var(--text-light); }
         .cert-item i { color: var(--primary); font-size: 1.2rem; margin-right: 8px; }
         .cert-item strong { color: var(--text); margin-left: 4px; }
 
-        /* FAQ */
         .faq-section { margin: 30px 0 0 0; width: 100%; }
         .faq-section h3 { color: var(--primary); margin-bottom: 25px; font-size: 1.5rem; font-weight: 700; }
         .faq-item { border-bottom: 1px solid #eee; }
@@ -427,7 +251,6 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
         .faq-answer p { padding-bottom: 15px; text-align: left; }
 
-        /* CTA BLOCK */
         .cta-bottom-block { margin-top: 10px; padding-top: 10px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: nowrap; }
         .cta-text-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0; width: 256.55px; border: 1px solid var(--primary); border-radius: 50px; color: var(--primary); font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; height: 48px; box-sizing: border-box; white-space: nowrap; }
         .cta-bottom-block .apply-btn-modern { width: 273.94px; position: relative; background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; border: none; border-radius: 50px; padding: 0 32px; font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; box-shadow: 0 4px 12px rgba(46, 204, 113, 0.25); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; overflow: hidden; height: 48px; box-sizing: border-box; white-space: nowrap; }
@@ -435,7 +258,6 @@
         .cta-bottom-block .apply-btn-modern i { margin-left: 8px; font-size: 11px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .cta-bottom-block .apply-btn-modern:hover i { transform: translateX(4px); }
 
-        /* CALCULATOR */
         .calculator-container { width: auto; max-width: 100%; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin: 0 10px; }
         .calculator-header { padding: 24px 30px; background: linear-gradient(135deg,#1e4a6e,#00a8b5); color: white; text-align: center; }
         .calculator-header h1 { font-size: 1.35rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; }
@@ -455,7 +277,6 @@
         .salary-value { font-family: 'Courier New', monospace; font-size: 1.05rem; font-weight: 700; color: #2d3748; letter-spacing: 1px; }
         .brand-footer { text-align: center; padding: 18px; background: #f8f9fa; border-top: 1px solid #e0e0e0; color: #7f8c8d; font-size: 0.68rem; }
 
-        /* FORM */
         .form-container { background: var(--card-bg); padding: 40px 35px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: auto; max-width: 100%; border: 1px solid rgba(255,255,255,0.3); position: relative; margin: 0 10px; }
         .form-container h2 { font-size: 28px; color: var(--primary); text-align: center; padding-bottom: 12px; position: relative; margin-bottom: 30px; }
         .form-container h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 2px; background: var(--gradient); border-radius: 2px; background-size: 200% auto; animation: shimmer 3s linear infinite; }
@@ -472,7 +293,6 @@
         .submit-btn:hover .icon-animate { transform: translateX(3px); }
         .brand-signature { position: absolute; bottom: 12px; right: 15px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 14px; color: var(--primary); letter-spacing: 0.8px; }
 
-        /* IPHONE WIDGET */
         .iphone-widget-wrapper { display: flex; justify-content: center; width: 100%; padding: 40px 0; overflow: visible; }
         .iphone-15-pro { --width: 260px; --height: 535px; --corner-radius: 44px; --base-teal: #2a5a66; --dark-teal: #1a3b42; --light-teal: #538d9c; --shine-teal: #82c2d1; position: relative; width: var(--width); height: var(--height); z-index: 10; box-shadow: 0 20px 50px rgba(26, 60, 94, 0.25); border-radius: var(--corner-radius); }
         .shadow-layer { position: absolute; z-index: -1; top: 40px; left: 20px; right: 20px; bottom: -30px; background: rgba(0, 20, 30, 0.5); filter: blur(60px); opacity: 0.7; border-radius: 40px; }
@@ -501,13 +321,7 @@
         .dynamic-island { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; background: #000; border-radius: 20px; z-index: 40; }
         .camera-lens { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: #0d0d0d; border-radius: 50%; box-shadow: inset 1px 1px 3px rgba(20, 40, 80, 0.8); }
 
-        /* =========================================
-           5. FOOTER & OTHER SECTIONS
-           ========================================= */
-        
-        /* UPDATED: Background for Why Us */
         .why-us-section { padding: 80px 0; background: var(--background); }
-        
         .premium-heading, .section-title, .contact-section h2 { 
             font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--primary); margin-bottom: 40px; 
             text-transform: uppercase; letter-spacing: 1px; display: inline-block; position: relative; text-align: center; width: 100%; 
@@ -521,48 +335,26 @@
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .feature-card { background: white; padding: 40px 30px; border-radius: 24px; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.03); }
         .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); }
-        
-        /* UPDATED STYLES FOR HIGHLIGHT CARD FROM NEW FILE */
         .feature-card.highlight { background: #1a3c5e; color: white; }
         .feature-card.highlight p { color: rgba(255,255,255,0.8); }
         .feature-card.highlight .icon-circle { background: rgba(255,255,255,0.1); color: #00a8b5; }
-        
-        /* RESTORED: Light background icons from new file */
         .icon-circle { width: 60px; height: 60px; background: #f0f8ff; color: #00a8b5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 25px; }
-        
         .feature-card h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; }
         .feature-card p { font-size: 0.95rem; color: #718096; line-height: 1.6; }
 
-        /* STEPS SECTION */
-        .steps-section { margin-top: 50px; text-align: center; margin-bottom: 0px; /* Зменшено нижній відступ */ }
-        .steps-container { 
-            display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; 
-            gap: 20px; position: relative; 
-            max-width: 1000px; 
-            margin: 0 auto; 
-        }
+        .steps-section { margin-top: 50px; text-align: center; margin-bottom: 0px; }
+        .steps-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; position: relative; max-width: 1000px; margin: 0 auto; }
         .step-item { flex: 1; min-width: 150px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
         .step-circle { width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; margin-bottom: 15px; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .step-item p { font-weight: 600; color: var(--text); font-size: 0.95rem; }
         .steps-line { position: absolute; top: 25px; left: 0; width: 100%; height: 2px; background: #e2e8f0; z-index: 1; }
         .step-item:last-child .step-circle { background: var(--prof-green); border-color: #fff; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
 
-        /* НОВИЙ СТИЛЬ РОЗДІЛЮВАЧА */
-        .fading-divider {
-            height: 1px;
-            width: 100%;
-            max-width: 900px;
-            margin: 50px auto; /* Збільшено відступ до 50px */
-            /* Gradient: Transparent -> Slightly Darker Grey -> Transparent */
-            background: linear-gradient(90deg, rgba(26, 60, 94, 0) 0%, rgba(26, 60, 94, 0.2) 50%, rgba(26, 60, 94, 0) 100%);
-            border: none;
-            display: block;
-        }
+        .fading-divider { height: 1px; width: 100%; max-width: 900px; margin: 50px auto; background: linear-gradient(90deg, rgba(26, 60, 94, 0) 0%, rgba(26, 60, 94, 0.2) 50%, rgba(26, 60, 94, 0) 100%); border: none; display: block; }
 
-        /* TESTIMONIALS */
         .testimonials-section { margin-top: 0; position: relative; text-align: center; }
         .testimonials-container { overflow: hidden; padding: 20px 0; text-align: left; max-width: 900px; margin: 0 auto; position: relative; }
-        .testimonials-track { display: flex; gap: 30px; transition: transform 0.5s ease-in-out; width: 100%; }
+        .testimonials-track { display: flex; gap: 30px; transition: transform 0.5s ease-in-out; width: 100%; will-change: transform; }
         .review-card { min-width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 20px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid rgba(255, 255, 255, 0.8); display: flex; gap: 15px; align-items: flex-start; }
         .review-avatar { width: 40px; height: 40px; background: #7bed9f; color: #1a3c5e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .review-content { flex-grow: 1; }
@@ -578,44 +370,26 @@
         .leave-review-btn { position: absolute; right: 0; display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border: 1px solid var(--primary); border-radius: 50px; color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease; background: transparent; }
         .leave-review-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26, 60, 94, 0.2); }
 
-        /* PARTNERS (MODIFIED) */
         .partners-block { text-align: center; padding-top: 0; margin-top: 0; }
-        
-        /* UPDATED: Title Changed for Safety */
         .partners-title { 
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
+            font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--primary); margin-bottom: 40px;
+            text-transform: uppercase; letter-spacing: 1px; position: relative; display: inline-block;
         }
         .partners-title::after {
             content: ''; display: block; width: 180px; height: 3px; 
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
-            background-size: 200% 100%;
-            margin: 15px auto 0;
-            border-radius: 2px;
-            animation: gradientFlow 3s ease infinite;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)); background-size: 200% 100%;
+            margin: 15px auto 0; border-radius: 2px; animation: gradientFlow 3s ease infinite;
         }
-
         .logos-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; }
-        /* Зменшено розмір до 60px */
-        .gray-logo { filter: grayscale(100%); opacity: 0.4; transition: 0.3s; max-height: 60px; }
+        .gray-logo { filter: grayscale(100%); opacity: 0.4; transition: 0.3s; max-height: 60px; width: auto; }
         .gray-logo:hover { filter: grayscale(0); opacity: 1; }
 
-        /* CONTACTS SECTION */
         .contact-section { background: var(--card-bg); border-radius: 18px; padding: 40px 30px; margin: 50px auto 30px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); max-width: 1000px; position: relative; overflow: hidden; }
         .contact-bg-anim { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: transparent; z-index: 0; transform: rotate(-15deg) scale(1.2); overflow: hidden; opacity: 0.03; pointer-events: none; display: flex; flex-direction: column; justify-content: center; gap: 0; }
         .pattern-row { display: flex; width: fit-content; white-space: nowrap; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.8rem; line-height: 1; color: #2d3748; text-transform: uppercase; letter-spacing: 0.2em; word-spacing: 0.6em; }
         .marquee-content { display: flex; gap: 10px; padding-right: 10px; }
         .move-left { animation: marquee-left 400s linear infinite; }
-        .move-right { animation: marquee-right 400s linear infinite; }
         @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
         .contact-header { text-align: center; margin-bottom: 30px; position: relative; z-index: 2; }
         .contact-header h2 { margin-bottom: 10px; }
         .contact-subtitle { color: var(--text-light); font-size: 0.9rem; font-weight: 400; margin-top: 0; }
@@ -657,7 +431,6 @@
         @keyframes swing-flipped { 0%{transform:scaleX(-1) rotate(0deg)} 25%{transform:scaleX(-1) rotate(10deg)} 50%{transform:scaleX(-1) rotate(-10deg)} 75%{transform:scaleX(-1) rotate(5deg)} 100%{transform:scaleX(-1) rotate(0deg)} }
         @keyframes pinDrop { 0% { transform: translateY(0); } 25% { transform: translateY(-12px); } 45% { transform: translateY(0); } 60% { transform: translateY(-6px); } 75% { transform: translateY(0); } 90% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
 
-        /* FOOTER */
         footer { background: linear-gradient(to top,#0a1e33,#1a3c5e); color: white; padding-top: 30px; margin-top: 40px; border-top: none; display: flex; flex-direction: column; align-items: center; }
         .footer-content-centered { text-align: center; max-width: 800px; padding: 0 20px; margin-bottom: 15px; }
         .footer-content-centered h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 6px; letter-spacing: 1px; }
@@ -679,9 +452,6 @@
         .back-to-top:hover { transform: translateY(-5px); background: rgba(0, 168, 181, 0.9); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .back-to-top.show { opacity: 1; visibility: visible; }
 
-        /* =========================================
-           EXISTING TABLET QUERY (RETAINED)
-           ========================================= */
         @media (max-width: 992px) {
             .container, .nav-content { padding: 0 20px; }
             .hero-title { font-size: 2.8rem; }
@@ -695,94 +465,54 @@
             .steps-line { display: none; }
             .contact-grid { grid-template-columns: 1fr; }
             .contact-column-left .contact-btn { padding-left: 20px; justify-content: center; }
-            
-            /* RESET MARGINS ON MOBILE TO PREVENT SQUISHING */
-            .job-description,
-            .big-white-container,
-            .calculator-container,
-            .form-container {
-                margin-left: 0;
-                margin-right: 0;
-            }
+            .job-description, .big-white-container, .calculator-container, .form-container { margin-left: 0; margin-right: 0; }
             .job-description { flex-direction: column; }
             .job-image-col { width: 100%; height: 200px; }
-            
-            /* HERO SPECIFIC MOBILE */
             .premium-hero .btn-outline { margin-left: 0; margin-top: 15px; display: block; text-align: center; width: 100%;}
             .premium-hero .btn-main { display: block; text-align: center; width: 100%; }
             .hero-actions { display: flex; flex-direction: column; gap: 10px; }
             .premium-hero::after { width: 200px; height: 200px; top: -50px; right: -20px; }
-
-            /* HOT VACANCIES MOBILE */
             .hv-container { flex-direction: column; }
             .hv-image-wrapper { flex: none; height: 250px; width: 100%; }
             .hv-divider { width: 100%; height: 4px; flex: none; }
             .hv-content-wrapper { padding: 30px 20px; }
             .hv-title { font-size: 1.6rem; }
-            /* Mobile Adjustment for Wide Cards */
             .hv-card { flex-direction: column; align-items: flex-start; }
             .hv-card-left { width: 100%; }
             .hv-card-link { padding-left: 0; border-left: none; border-top: 1px solid #e2e8f0; width: 100%; padding-top: 15px; margin-top: 10px; text-align: center; }
-
-            /* MOBILE LOGO FIX - DISABLE GRAYSCALE */
             .gray-logo { filter: none; opacity: 1; }
         }
 
-        /* =========================================
-           NEW: SPECIFIC MOBILE OPTIMIZATION (<768px)
-           ========================================= */
         @media (max-width: 768px) {
-            /* General Layout Overrides */
             .container { padding: 0 15px; }
             .main-layout { gap: 40px; margin-top: 15px; }
-            
-            /* Hero Fine-tuning */
             .premium-hero { padding: 80px 0 40px; text-align: center; }
             .hero-title { font-size: 2rem; margin-bottom: 20px; }
             .hero-subtitle { font-size: 1rem; margin-bottom: 30px; }
             .hero-actions { width: 100%; max-width: 320px; margin: 0 auto; }
-            
-            /* Agency Info Stack */
             .agency-info-container { flex-direction: column; padding: 20px; text-align: center; gap: 20px; }
             .agency-info-text { padding: 0; border: none; border-top: 3px solid var(--secondary); padding-top: 15px; }
             .clock-wrapper { width: 100%; display: flex; justify-content: center; }
-
-            /* Stats Grid */
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-            /* Interactive Sidebar Blocks */
             .interactive-blocks { margin-top: 20px; }
             .form-container, .calculator-container { margin: 0; width: 100%; }
-            
-            /* Calculator Adjustments */
             .calculator-body { padding: 20px; }
             .calculator-header h1 { font-size: 1.2rem; }
             .salary-value { font-size: 1rem; }
-
-            /* Hot Vacancies */
             .hot-vacancies-section { margin: 0 0 30px 0; border-radius: 12px; }
             .hv-content-wrapper { padding: 25px 15px; }
             .hv-card { padding: 15px; }
             .hv-position { font-size: 1rem; }
             .hv-btn-primary { width: 100%; text-align: center; padding: 14px 20px; }
-
-            /* Big White Box Content */
             .big-white-container { padding: 25px 15px; margin: 30px 0 0 0; }
             .cta-bottom-block { flex-direction: column; gap: 15px; }
             .cta-text-wrapper, .cta-bottom-block .apply-btn-modern { width: 100%; max-width: 320px; }
-
-            /* iPhone Widget Scaling */
             .iphone-widget-wrapper { padding: 20px 0; overflow-x: hidden; }
             .iphone-15-pro { margin: 0 auto; }
-
-            /* Footer */
             .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; padding: 0 20px; }
             .footer-bottom-links a { margin: 0 10px; }
         }
 
-        /* =========================================
-           NEW: SMALL PHONES (<480px)
-           ========================================= */
         @media (max-width: 480px) {
             .hero-title { font-size: 1.75rem; }
             .stats-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -790,14 +520,12 @@
             .partners-block { margin-top: 20px; }
             .logos-flex { gap: 25px; }
             .gray-logo { max-height: 45px !important; }
-            .nav-links { width: 100%; padding-left: 15px; padding-right: 15px; }
-            .nav-links a { width: 100%; max-width: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- === NEW CLEAN NAVBAR === -->
+    <!-- === NEW CLEAN NAVBAR (FROM NAVBAR.HTML) === -->
     <nav class="navbar" id="main-navbar">
         <div class="nav-content">
             <a href="holovna.html" class="logo">PROFIL JOBS</a>
@@ -814,17 +542,13 @@
             </div>
         </div>
     </nav>
-    <!-- === END NAVBAR === -->
 
-    <!-- HERO SECTION (NEW VERSION) -->
+    <!-- HERO SECTION -->
     <section class="premium-hero">
         <div class="container">
             <span class="hero-tag">Офіційне працевлаштування в Польщі</span>
-            
             <h1 class="hero-title">Робота в Польщі<br>без кордонів та ризиків</h1>
-            
             <p class="hero-subtitle">Ми з’єднуємо працьовитих людей із перевіреними роботодавцями Польщі. Безпечно. Легально. Швидко.</p>
-            
             <div class="hero-actions">
                 <a href="vakansiyi.html" class="btn-main">Переглянути вакансії</a>
                 <a href="pro-nas.html" class="btn-outline">Про компанію</a>
@@ -832,7 +556,7 @@
         </div>
     </section>
 
-    <!-- AGENCY INFO BLOCK WITH CLOCK -->
+    <!-- AGENCY INFO -->
     <div class="container">
         <div class="agency-info-container">
             <div class="agency-info-text">
@@ -854,50 +578,29 @@
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-item">
-                    <h3 class="counter" data-target="5">0</h3>
-                    <p>Років на ринку</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="counter" data-target="2500">0</h3>
-                    <p>Працевлаштованих</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="counter" data-target="100">0</h3>
-                    <p>Активних вакансій</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="counter" data-target="200">0</h3>
-                    <p>Партнерів в ЄС</p>
-                </div>
+                <div class="stat-item"><h3 class="counter" data-target="5">0</h3><p>Років на ринку</p></div>
+                <div class="stat-item"><h3 class="counter" data-target="2500">0</h3><p>Працевлаштованих</p></div>
+                <div class="stat-item"><h3 class="counter" data-target="100">0</h3><p>Активних вакансій</p></div>
+                <div class="stat-item"><h3 class="counter" data-target="200">0</h3><p>Партнерів в ЄС</p></div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- MAIN CONTENT -->
     <div class="container main-layout">
         <!-- LEFT COLUMN: CONTENT -->
         <div class="content-col">
-            
-            <!-- NEW HOT VACANCIES BLOCK (Replaces old list) -->
+            <!-- HOT VACANCIES -->
             <section class="hot-vacancies-section">
                 <div class="hv-container">
-                    
-                    <!-- Червона розділова смужка (тепер зліва) -->
                     <div class="hv-divider"></div>
-
-                    <!-- Права частина: Контент -->
                     <div class="hv-content-wrapper">
-                        
-                        <!-- Заголовок з пульсуючим кружком -->
                         <div class="hv-header">
                             <div class="pulsing-indicator"></div>
                             <h2 class="hv-title">Гарячі вакансії</h2>
                         </div>
-
-                        <!-- Сітка з картками -->
                         <div class="hv-cards-grid">
-                            
-                            <!-- Картка 1 (Тепер BMW/Mercedes) -->
+                            <!-- Card 1 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -912,8 +615,7 @@
                                 </div>
                                 <a href="montuvannya-detaley-na-avtozavod-bmw-mini-mercedes.html" class="hv-card-link">Детальніше &rarr;</a>
                             </div>
-
-                            <!-- Картка 2 (Тепер Тапіцер) -->
+                            <!-- Card 2 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -928,8 +630,7 @@
                                 </div>
                                 <a href="tapitser-na-meblevu-fabryku.html" class="hv-card-link">Детальніше &rarr;</a>
                             </div>
-
-                            <!-- Картка 3 -->
+                            <!-- Card 3 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -944,21 +645,16 @@
                                 </div>
                                 <a href="pakuwalnyk-odziahu.html" class="hv-card-link">Детальніше &rarr;</a>
                             </div>
-
                         </div>
-
-                        <!-- Головна кнопка -->
                         <div class="hv-actions">
                             <a href="vakansiyi.html" class="hv-btn-primary">Дивитись всі вакансії</a>
                         </div>
-
                     </div>
                 </div>
             </section>
 
-            <!-- BIG WHITE BOX (WHY US + LICENSE + FAQ + CTA) -->
+            <!-- BIG WHITE BOX -->
             <div class="big-white-container">
-                <!-- WHY VACANCY BLOCK (UPDATED TEXT) -->
                 <div class="why-us-block" style="margin-top:0;">
                     <h4>Чому обирають саме нас?</h4>
                     <ul class="why-list">
@@ -969,17 +665,15 @@
                     </ul>
                 </div>
 
-                <!-- LICENSE BLOCK (UPDATED WITH NEW DATA) -->
                 <div class="cert-block">
                     <div class="cert-item"><i class="fas fa-certificate"></i> REGON: <strong>386594291</strong></div>
                     <div class="cert-item"><i class="fas fa-file-alt"></i> KRS: <strong>0000851046</strong></div>
                     <div class="cert-item"><i class="fas fa-id-card"></i> NIP: <strong>5252829545</strong></div>
                 </div>
 
-                <!-- FAQ (EXTENDED LIST) -->
+                <!-- FAQ -->
                 <div class="faq-section">
                     <h3>Часті запитання</h3>
-                    
                     <div class="faq-item"><button class="faq-question">Чи платні вакансії? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Ні. Усі вакансії для шукачів роботи повністю безкоштовні. Оплату за підбір персоналу здійснює роботодавець.</p></div></div>
                     <div class="faq-item"><button class="faq-question">Які документи потрібні для працевлаштування? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Залежить від вакансії, але зазвичай це лише закордонний паспорт. Додатково це може бути медична карта. Ми допомагаємо з оформленням усіх документів.</p></div></div>
                     <div class="faq-item"><button class="faq-question">Чи потрібен досвід роботи або знання мови? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Для більшості вакансій досвід та знання мови не обов’язкові — навчання відбувається на місці. Якщо навички потрібні, це вказано в описі.</p></div></div>
@@ -991,11 +685,8 @@
                     <div class="faq-item"><button class="faq-question">Які гарантії, якщо робота не підійде або чи можна довіряти компанії? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Ми працюємо лише з ліцензованими роботодавцями. Якщо робота не підійде, ми оперативно та безкоштовно запропонуємо іншу вакансію.</p></div></div>
                 </div>
 
-                <!-- NEW CTA BLOCK (UPDATED ALIGNMENT) -->
                 <div class="cta-bottom-block">
-                    <div class="cta-text-wrapper">
-                        <span>Потрібна консультація?</span>
-                    </div>
+                    <div class="cta-text-wrapper"><span>Потрібна консультація?</span></div>
                     <a href="otrymaty-konsultatsiyu.html" class="apply-btn-modern">Отримати консультацію <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
@@ -1003,7 +694,7 @@
 
         <!-- RIGHT COLUMN: SIDEBAR -->
         <div class="sidebar-col interactive-blocks">
-            <!-- 1. FORM -->
+            <!-- FORM -->
             <form class="form-container" id="contact-form" action="https://formspree.io/f/mldbagyo" method="POST">
                 <h2>Швидка заявка</h2>
                 <div class="form-group">
@@ -1020,7 +711,7 @@
                 <div class="brand-signature">Profil Jobs</div>
             </form>
 
-            <!-- 2. CALCULATOR -->
+            <!-- CALCULATOR -->
             <div class="calculator-container">
                 <div class="calculator-header"><h1><i class="fas fa-calculator"></i> Калькулятор зарплати</h1></div>
                 <div class="calculator-body">
@@ -1037,27 +728,18 @@
 
             <!-- IPHONE WIDGET -->
             <div class="iphone-widget-wrapper" style="margin-top:0; flex-direction: column; align-items: center; gap: 25px;">
-                <h3 style="font-family: 'Montserrat', sans-serif; color: var(--primary); font-size: 1.4rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 0; position: relative; display: inline-block;">
-                    Ми у TikTok
-                </h3>
-                
+                <h3 style="font-family: 'Montserrat', sans-serif; color: var(--primary); font-size: 1.4rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 0; position: relative; display: inline-block;">Ми у TikTok</h3>
                 <div class="iphone-15-pro">
-                    <div class="shadow-layer"></div>
-                    <div class="chassis"></div>
-                    <div class="btn action"></div><div class="btn vol-up"></div><div class="btn vol-down"></div><div class="btn power"></div>
-                    <div class="antenna top"></div><div class="antenna bottom"></div>
+                    <div class="shadow-layer"></div><div class="chassis"></div><div class="btn action"></div><div class="btn vol-up"></div><div class="btn vol-down"></div><div class="btn power"></div><div class="antenna top"></div><div class="antenna bottom"></div>
                     <div class="bezel">
                         <div class="cta-container">
-                            <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="tiktok-btn">
+                            <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" rel="noopener noreferrer" class="tiktok-btn">
                                 <svg class="tiktok-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a90.25,90.25,0,1,0,43.7,77.79V83h87.08A122.91,122.91,0,0,0,448,209.91Z"/></svg>
                                 Відкрити TikTok
                             </a>
                         </div>
                         <div class="screen">
-                            <!-- GALLERY CONTAINER EMPTY FOR DRIVE API -->
-                            <div class="gallery-container-phone" id="gallery-phone">
-                                <!-- JS will populate this -->
-                            </div>
+                            <div class="gallery-container-phone" id="gallery-phone"></div>
                         </div>
                         <div class="dynamic-island"><div class="camera-lens"></div></div>
                     </div>
@@ -1119,7 +801,6 @@
         </div>
     </div>
     
-    <!-- РОЗДІЛЮВАЛЬНА ЛІНІЯ -->
     <div class="fading-divider"></div>
 
     <!-- TESTIMONIALS -->
@@ -1161,34 +842,31 @@
                     </div>
                     <div class="review-controls">
                         <div class="review-nav">
-                            <button class="review-btn prev-review"><i class="fas fa-chevron-left"></i></button>
-                            <button class="review-btn next-review"><i class="fas fa-chevron-right"></i></button>
+                            <button class="review-btn prev-review" aria-label="Попередній відгук"><i class="fas fa-chevron-left"></i></button>
+                            <button class="review-btn next-review" aria-label="Наступний відгук"><i class="fas fa-chevron-right"></i></button>
                         </div>
                         <a href="zalyshyty-vidhuk.html" class="leave-review-btn"><i class="fas fa-pen"></i> Залишити відгук</a>
                     </div>
                 </div>
             </div>
             
-            <!-- РОЗДІЛЮВАЛЬНА ЛІНІЯ -->
             <div class="fading-divider"></div>
 
             <!-- PARTNERS -->
             <div class="partners-block">
                 <h2 class="partners-title">Популярні напрямки</h2>
                 <div class="logos-flex">
-                    <!-- BIEDRONKA LOGO SIZED UP -->
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Biedronka_logo.svg/1200px-Biedronka_logo.svg.png" alt="Biedronka" class="gray-logo" style="max-height: 85px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/1200px-Coca-Cola_logo.svg.png" alt="Coca Cola" class="gray-logo" style="max-height: 60px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="gray-logo" style="max-height: 60px;">
-                    <!-- DHL LOGO FIXED -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/DHL_Logo.svg/2000px-DHL_Logo.svg.png" alt="DHL" class="gray-logo" style="max-height: 60px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara" class="gray-logo" style="max-height: 60px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Biedronka_logo.svg/1200px-Biedronka_logo.svg.png" alt="Biedronka" class="gray-logo" style="max-height: 85px;" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/1200px-Coca-Cola_logo.svg.png" alt="Coca Cola" class="gray-logo" style="max-height: 60px;" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="gray-logo" style="max-height: 60px;" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/DHL_Logo.svg/2000px-DHL_Logo.svg.png" alt="DHL" class="gray-logo" style="max-height: 60px;" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara" class="gray-logo" style="max-height: 60px;" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACTS SECTION (UPDATED) -->
+    <!-- CONTACTS -->
     <div class="contact-section">
         <div class="contact-bg-anim">
              <div class="pattern-row move-left"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
@@ -1199,9 +877,9 @@
         </div>
         <div class="contact-grid">
             <div class="contact-column-left">
-                <a href="https://t.me/ProfilJobs" target="_blank" class="contact-btn telegram social"><div class="icon-box"><i class="fab fa-telegram-plane"></i></div><div><span class="contact-label">Telegram</span><span class="contact-text-val">@ProfilJobs</span></div></a>
-                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="contact-btn tiktok social"><div class="icon-box"><i class="fab fa-tiktok"></i></div><div><span class="contact-label">TikTok</span><span class="contact-text-val">@profil.jobs.ua_pl</span></div></a>
-                <a href="viber://chat?number=+48660962345" target="_blank" class="contact-btn viber social"><div class="icon-box"><i class="fab fa-viber"></i></div><div><span class="contact-label">Viber</span><span class="contact-text-val">+48 660 962 345</span></div></a>
+                <a href="https://t.me/ProfilJobs" target="_blank" rel="noopener noreferrer" class="contact-btn telegram social" aria-label="Telegram"><div class="icon-box"><i class="fab fa-telegram-plane"></i></div><div><span class="contact-label">Telegram</span><span class="contact-text-val">@ProfilJobs</span></div></a>
+                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" rel="noopener noreferrer" class="contact-btn tiktok social" aria-label="TikTok"><div class="icon-box"><i class="fab fa-tiktok"></i></div><div><span class="contact-label">TikTok</span><span class="contact-text-val">@profil.jobs.ua_pl</span></div></a>
+                <a href="viber://chat?number=+48660962345" target="_blank" rel="noopener noreferrer" class="contact-btn viber social" aria-label="Viber"><div class="icon-box"><i class="fab fa-viber"></i></div><div><span class="contact-label">Viber</span><span class="contact-text-val">+48 660 962 345</span></div></a>
                 <div class="contact-btn hours-card" style="cursor: default;">
                     <div class="icon-box"><i class="fas fa-clock"></i></div>
                     <div class="hours-content">
@@ -1216,26 +894,23 @@
             </div>
             <div class="contact-column-right">
                 <a href="tel:+380639446736" class="contact-btn phone"><div class="icon-box"><i class="fas fa-phone-alt"></i></div><div><span class="contact-label">Україна</span><span class="contact-text-val"><span class="flag-icon flag-ua contact-flag"></span>+38 063 944 67 36</span></div></a>
-                
                 <a href="tel:+48660962345" class="contact-btn phone"><div class="icon-box"><i class="fas fa-phone-alt"></i></div><div><span class="contact-label">Польща</span><span class="contact-text-val"><span class="flag-icon flag-pl contact-flag"></span>+48 660 962 345</span></div></a>
                 <div class="office-card">
-                    <!-- CONTACTS CARD ADDRESS (LONG VERSION) -->
                     <div class="office-header"><div class="icon-box"><i class="fas fa-map-marker-alt"></i></div><div class="office-info"><h3>Головний офіс</h3><p>Warszawa, Twarda 18, поверх 15</p></div></div>
-                    <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.446462162076!2d21.00046461579687!3d52.23492897976098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8c9269f76f%3A0x7871702310712452!2sTwarda%2018%2C%2000-105%20Warszawa%2C%20Poland!5e0!3m2!1suk!2sua!4v1678900000000!5m2!1suk!2sua" allowfullscreen=""></iframe></div>
+                    <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.446462162076!2d21.00046461579687!3d52.23492897976098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8c9269f76f%3A0x7871702310712452!2sTwarda%2018%2C%2000-105%20Warszawa%2C%20Poland!5e0!3m2!1suk!2sua!4v1678900000000!5m2!1suk!2sua" allowfullscreen="" loading="lazy"></iframe></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content-centered">
             <h3>PROFIL JOBS</h3>
             <p>Ліцензоване кадрове агентство з багаторічним досвідом працевлаштування в Польщі.</p>
             <div class="social-icons">
-                <a href="https://t.me/ProfilJobs" target="_blank" class="social-link-footer"><i class="fab fa-telegram-plane"></i></a>
-                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="social-link-footer"><i class="fab fa-tiktok"></i></a>
-                <a href="viber://chat?number=+48660962345" target="_blank" class="social-link-footer"><i class="fab fa-viber"></i></a>
+                <a href="https://t.me/ProfilJobs" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="viber://chat?number=+48660962345" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Viber"><i class="fab fa-viber"></i></a>
             </div>
             <div class="footer-laconic-links">
                 <a href="holovna.html">Головна</a>
@@ -1246,10 +921,9 @@
                 <a href="polityka-konfidentsiynosti.html">Політика конфіденційності</a>
                 <a href="umovy-vykorystannya.html">Умови використання</a>
                 <a href="cookies.html">Cookies</a>
-                <a href="litsenziya.html">license.html</a>
+                <a href="license.html">Ліцензія</a>
             </div>
             <div class="footer-contact-row">
-                <!-- FOOTER ADDRESS (SHORT VERSION) -->
                 <span><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
                 <span><i class="fas fa-phone"></i> +48 660 962 345</span>
                 <span><i class="fas fa-envelope"></i> nicholasstascompany@gmail.com</span>
@@ -1266,17 +940,19 @@
         </div>
     </footer>
 
-    <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+    <a href="#" class="back-to-top" aria-label="Вгору"><i class="fas fa-chevron-up"></i></a>
 
     <!-- SCRIPTS -->
     <script>
-        // --- NEW NAVBAR SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
+            // =========================================
+            // 1. UPDATED NAVBAR LOGIC (FROM NAVBAR.HTML)
+            // =========================================
             const navbar = document.getElementById('main-navbar');
             const hamburger = document.getElementById('hamburger-btn');
             const navLinks = document.getElementById('nav-links');
-            
-            // Логіка мобільного меню
+
+            // --- МЕНЮ БУРГЕР ---
             if (hamburger && navLinks) {
                 hamburger.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
@@ -1290,75 +966,46 @@
                 });
             }
 
-            // Логіка скролу для ефекту скла та приховування
-            let lastScrollTop = 0;
-            const delta = 5;
-            
+            // --- ЛОГІКА СКРОЛУ ---
             window.addEventListener('scroll', function() {
                 const st = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Додавання класу scrolled для фону
+                // Додаємо ефект "білої муті" (0.79) при скролі
                 if (st > 10) {
-                    if(navbar) navbar.classList.add('scrolled');
+                    navbar.classList.add('scrolled');
                 } else {
-                    if(navbar) navbar.classList.remove('scrolled');
+                    navbar.classList.remove('scrolled');
                 }
+            }, { passive: true });
 
-                // Приховування при скролі вниз (тільки мобільні >768px - логіка з оригінального файлу збережена для сумісності, але трохи адаптована)
-                // Якщо ширина екрану велика, ми не ховаємо меню
-                if (window.innerWidth > 768) {
-                    if (navbar) navbar.classList.remove('nav-hidden'); 
-                    return;
-                }
-                
-                if (!navbar) return;
-                const navbarHeight = navbar.offsetHeight;
-                
-                // Якщо меню відкрите, не ховаємо його
-                if (navLinks && navLinks.classList.contains('active')) {
-                    lastScrollTop = st; return;
-                }
-                
-                if (Math.abs(lastScrollTop - st) <= delta) return;
-                
-                // Ховаємо, якщо скролимо вниз і прокрутили більше висоти меню
-                if (st > lastScrollTop && st > navbarHeight) {
-                    navbar.classList.add('nav-hidden');
-                } else {
-                    // Показуємо, якщо скролимо вгору або досягли дна
-                    if(st + window.innerHeight < document.body.scrollHeight) {
-                        navbar.classList.remove('nav-hidden');
-                    }
-                }
-                lastScrollTop = st;
-            });
-        });
 
-        // 1. CLOCK
-        function updateClocks() {
-            const now = new Date();
-            const plTime = now.toLocaleTimeString('uk-UA', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' });
-            const uaTime = now.toLocaleTimeString('uk-UA', { timeZone: 'Europe/Kiev', hour: '2-digit', minute: '2-digit' });
-            const elPl = document.getElementById('clock-pl');
-            const elUa = document.getElementById('clock-ua');
-            if(elPl) elPl.innerText = plTime; if(elUa) elUa.innerText = uaTime;
-        }
-        setInterval(updateClocks, 1000); updateClocks();
+            // =========================================
+            // 2. EXISTING SITE LOGIC
+            // =========================================
 
-        // 2. COUNTERS
-        document.addEventListener("DOMContentLoaded", () => {
+            // CLOCK
+            function updateClocks() {
+                const now = new Date();
+                const plTime = now.toLocaleTimeString('uk-UA', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' });
+                const uaTime = now.toLocaleTimeString('uk-UA', { timeZone: 'Europe/Kiev', hour: '2-digit', minute: '2-digit' });
+                const elPl = document.getElementById('clock-pl');
+                const elUa = document.getElementById('clock-ua');
+                if(elPl) elPl.innerText = plTime; if(elUa) elUa.innerText = uaTime;
+            }
+            setInterval(updateClocks, 1000); updateClocks();
+
+            // COUNTERS
             const counters = document.querySelectorAll(".counter");
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const counter = entry.target;
+                        const target = +counter.getAttribute("data-target");
+                        const inc = target / 50; 
                         const updateCount = () => {
-                            const target = +counter.getAttribute("data-target");
                             const count = +counter.innerText;
-                            const inc = target / 100; 
                             if (count < target) {
                                 counter.innerText = Math.ceil(count + inc);
-                                setTimeout(updateCount, 20);
+                                requestAnimationFrame(updateCount);
                             } else { counter.innerText = target; }
                         };
                         updateCount();
@@ -1368,9 +1015,8 @@
             }, { threshold: 0.5 });
             counters.forEach(c => observer.observe(c));
 
-            // 3. FAQ
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(question => {
+            // FAQ
+            document.querySelectorAll('.faq-question').forEach(question => {
                 question.addEventListener('click', () => {
                     const answer = question.nextElementSibling;
                     const isActive = question.classList.contains('active');
@@ -1379,26 +1025,22 @@
                 });
             });
 
-            // 4. CALCULATOR
+            // CALCULATOR
             const rateInput = document.getElementById('rate');
-            const rateRange = document.getElementById('rateRange');
             const daysInput = document.getElementById('days');
-            const daysRange = document.getElementById('daysRange');
             const hoursInput = document.getElementById('hours');
-            const hoursRange = document.getElementById('hoursRange');
             const salaryPLN = document.getElementById('salaryPLN');
             const salaryUAH = document.getElementById('salaryUAH');
-            const exchangeRate = 11.50;
-
+            
             function calculateSalary() {
                 const rate = parseFloat(rateInput.value) || 27;
                 const days = parseInt(daysInput.value) || 5;
                 const hours = parseInt(hoursInput.value) || 8;
                 const monthlyHours = days * hours * 4;
-                const salaryPLNValue = rate * monthlyHours;
-                const salaryUAHValue = salaryPLNValue * exchangeRate;
-                salaryPLN.textContent = salaryPLNValue.toLocaleString('uk-UA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' zł';
-                salaryUAH.textContent = salaryUAHValue.toLocaleString('uk-UA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' ₴';
+                const valPLN = rate * monthlyHours;
+                const valUAH = valPLN * 11.50;
+                if(salaryPLN) salaryPLN.textContent = valPLN.toLocaleString('uk-UA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' zł';
+                if(salaryUAH) salaryUAH.textContent = valUAH.toLocaleString('uk-UA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' ₴';
             }
 
             function syncInputAndSlider(input, slider) {
@@ -1408,103 +1050,99 @@
             }
 
             [rateInput, daysInput, hoursInput].forEach(input => {
+                if(!input) return;
                 const slider = document.getElementById(input.id + 'Range');
                 input.addEventListener('input', () => syncInputAndSlider(input, slider));
                 input.addEventListener('blur', () => syncInputAndSlider(input, slider));
-            });
-
-            [rateRange, daysRange, hoursRange].forEach(slider => {
-                const input = document.getElementById(slider.id.replace('Range', ''));
-                slider.addEventListener('input', () => { input.value = slider.value; calculateSalary(); });
+                if(slider) slider.addEventListener('input', () => { input.value = slider.value; calculateSalary(); });
             });
             calculateSalary();
 
-            // 5. PHONE SLIDER
+            // PHONE SLIDER
             const phoneSlider = document.getElementById('gallery-phone');
-            setInterval(() => {
-                if(phoneSlider) {
+            if(phoneSlider) {
+                setInterval(() => {
                     const h = phoneSlider.clientHeight;
                     if(phoneSlider.scrollTop + h >= phoneSlider.scrollHeight - 10) {
                         phoneSlider.scrollTo({top:0, behavior:'smooth'});
                     } else {
                         phoneSlider.scrollBy({top: h, behavior:'smooth'});
                     }
-                }
-            }, 3000);
+                }, 3000);
+            }
 
-            // 6. TESTIMONIALS
+            // TESTIMONIALS
             const reviewTrack = document.querySelector('.testimonials-track');
             const reviews = document.querySelectorAll('.review-card');
             const prevReviewBtn = document.querySelector('.prev-review');
             const nextReviewBtn = document.querySelector('.next-review');
             const testimonialsContainer = document.querySelector('.testimonials-container');
-            let currentReview = 0;
-            const totalReviews = reviews.length;
-            let autoSlideReviewInterval;
+            
+            if(reviewTrack && reviews.length > 0) {
+                let currentReview = 0;
+                const totalReviews = reviews.length;
+                let autoSlideReviewInterval;
 
-            function updateReviews() {
-                reviewTrack.style.transform = `translateX(calc(-100% * ${currentReview} - 30px * ${currentReview}))`;
+                function updateReviews() {
+                    reviewTrack.style.transform = `translateX(calc(-100% * ${currentReview} - 30px * ${currentReview}))`;
+                }
+                function nextReview() {
+                    currentReview++; if (currentReview >= totalReviews) currentReview = 0;
+                    updateReviews();
+                }
+                function prevReview() {
+                    currentReview--; if (currentReview < 0) currentReview = totalReviews - 1;
+                    updateReviews();
+                }
+                if(nextReviewBtn) nextReviewBtn.addEventListener('click', nextReview);
+                if(prevReviewBtn) prevReviewBtn.addEventListener('click', prevReview);
+                
+                autoSlideReviewInterval = setInterval(nextReview, 5000);
+                if(testimonialsContainer) {
+                    testimonialsContainer.addEventListener('mouseenter', () => clearInterval(autoSlideReviewInterval));
+                    testimonialsContainer.addEventListener('mouseleave', () => autoSlideReviewInterval = setInterval(nextReview, 5000));
+                }
             }
-            function nextReview() {
-                currentReview++; if (currentReview >= totalReviews) currentReview = 0;
-                updateReviews();
-            }
-            function prevReview() {
-                currentReview--; if (currentReview < 0) currentReview = totalReviews - 1;
-                updateReviews();
-            }
-            nextReviewBtn.addEventListener('click', nextReview);
-            prevReviewBtn.addEventListener('click', prevReview);
-            autoSlideReviewInterval = setInterval(nextReview, 5000);
-            testimonialsContainer.addEventListener('mouseenter', () => clearInterval(autoSlideReviewInterval));
-            testimonialsContainer.addEventListener('mouseleave', () => autoSlideReviewInterval = setInterval(nextReview, 5000));
 
-            // 7. BACK TO TOP
+            // BACK TO TOP
             const backToTop = document.querySelector('.back-to-top');
-            window.addEventListener('scroll', () => { backToTop.classList.toggle('show', window.scrollY > 300); });
-            backToTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            if(backToTop) {
+                window.addEventListener('scroll', () => { backToTop.classList.toggle('show', window.scrollY > 300); }, { passive: true });
+                backToTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            }
 
-            // 8. GOOGLE DRIVE IMAGE LOADER (NEW)
+            // GOOGLE DRIVE IMAGES
             async function loadDriveImages() {
                 const apiKey = 'AIzaSyCJkTASOzVjPBboGFOkTU1nfMRD-iUuaF0';
                 const folderId = '1ZOrUJ64ntSCeFh8ze7d86Iu6pghye023';
                 const galleryContainer = document.getElementById('gallery-phone');
-                
-                // Construct API URL: List files in folder, ensure they are images and not trashed
+                if(!galleryContainer) return;
+
                 const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'+and+trashed=false&fields=files(id,thumbnailLink)&key=${apiKey}`;
 
                 try {
                     const response = await fetch(url);
                     const data = await response.json();
-
                     if (data.files && data.files.length > 0) {
-                        // Clear existing content (if any)
                         galleryContainer.innerHTML = '';
-
                         data.files.forEach(file => {
                             if (file.thumbnailLink) {
-                                // Google Drive API returns small thumbnails by default (s220).
-                                // Replacing s220 with s1000 requests a larger version suitable for the display.
                                 const largeImageLink = file.thumbnailLink.replace(/=s\d+$/, '=s1000');
-                                
                                 const div = document.createElement('div');
                                 div.className = 'gallery-item';
-                                
                                 const img = document.createElement('img');
                                 img.src = largeImageLink;
                                 img.alt = 'Drive Image';
-                                
+                                img.loading = "lazy";
                                 div.appendChild(img);
                                 galleryContainer.appendChild(div);
                             }
                         });
                     }
                 } catch (error) {
-                    console.error('Error loading Google Drive images:', error);
+                    console.error('Error loading images:', error);
                 }
             }
-            
-            // Call the function
             loadDriveImages();
         });
     </script>
