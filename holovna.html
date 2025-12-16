@@ -68,8 +68,8 @@
         /* СТАН 2: При скролі - Біла муть 0.79 */
         .navbar.scrolled::before {
             background: rgba(255, 255, 255, 0.79); 
-            backdrop-filter: blur(9px) saturate(160%); 
-            -webkit-backdrop-filter: blur(9px) saturate(160%);
+            backdrop-filter: blur(11px) saturate(160%); 
+            -webkit-backdrop-filter: blur(11px) saturate(160%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
@@ -131,8 +131,8 @@
                 position: fixed; 
                 top: var(--navbar-height); left: 0; width: 100%; height: auto;
                 background: rgba(255, 255, 255, 0.15); 
-                backdrop-filter: blur(8px) saturate(150%) contrast(108%);
-                -webkit-backdrop-filter: blur(8px) saturate(150%) contrast(108%);
+                backdrop-filter: blur(8px) saturate(160%) contrast(108%);
+                -webkit-backdrop-filter: blur(8px) saturate(160%) contrast(108%);
                 border-top: 1px solid rgba(255,255,255,0.3);
                 box-shadow: 0 20px 40px rgba(0,0,0,0.1);
                 display: flex; 
@@ -554,8 +554,17 @@
             .big-white-container { padding: 25px 15px; margin: 30px 0 0 0; }
             .cta-bottom-block { flex-direction: column; gap: 15px; }
             .cta-text-wrapper, .cta-bottom-block .apply-btn-modern { width: 100%; max-width: 320px; }
-            .iphone-widget-wrapper { padding: 20px 0; overflow-x: hidden; }
+            
+            /* iPhone Widget Mobile Fixes */
+            .iphone-widget-wrapper { 
+                padding: 20px 0; 
+                overflow-x: hidden;
+            }
             .iphone-15-pro { margin: 0 auto; }
+            
+            /* Scroll fix for gallery on mobile */
+            .gallery-container-phone { scroll-snap-stop: always; }
+
             .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; padding: 0 20px; }
             .footer-bottom-links a { margin: 0 10px; }
         }
@@ -1166,21 +1175,19 @@
             if (phoneSlider) {
                 let autoScrollInterval;
 
-                // Stop function: clears interval and removes listeners ONLY ON MOBILE
+                // Stop function: clears interval and removes listeners
                 const stopAutoScroll = () => {
-                    if (window.innerWidth <= 768) { // Only stop on mobile
-                        if (autoScrollInterval) {
-                            clearInterval(autoScrollInterval);
-                            autoScrollInterval = null;
-                            // Once stopped by interaction, remove listeners so they don't fire again
-                            phoneSlider.removeEventListener('touchstart', stopAutoScroll);
-                            phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
-                            phoneSlider.removeEventListener('wheel', stopAutoScroll);
-                        }
+                    if (autoScrollInterval) {
+                        clearInterval(autoScrollInterval);
+                        autoScrollInterval = null;
+                        // Once stopped by interaction, remove listeners so they don't fire again
+                        phoneSlider.removeEventListener('touchstart', stopAutoScroll);
+                        phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
+                        phoneSlider.removeEventListener('wheel', stopAutoScroll);
                     }
                 };
 
-                // Add listeners for user interaction to stop auto-scroll PERMANENTLY (mobile only)
+                // Add listeners for user interaction to stop auto-scroll PERMANENTLY
                 phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
                 phoneSlider.addEventListener('pointerdown', stopAutoScroll);
                 phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
