@@ -159,18 +159,31 @@
 
             /* Випадаюче меню */
             .nav-links {
-                position: absolute; top: var(--navbar-height); left: 0; width: 100%; height: auto;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(15px) saturate(180%);
-                -webkit-backdrop-filter: blur(15px) saturate(180%);
-                flex-direction: column; 
-                align-items: center; /* Центрування кнопок по горизонталі */
-                padding: 25px 0; 
-                border-top: 1px solid #f0f0f0;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-                opacity: 0; visibility: hidden; transform: translateY(-10px);
-                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-                z-index: 1001; pointer-events: none;
+                 position: absolute;
+    		 top: var(--navbar-height);
+    		 left: 0;
+    		 width: 100%;
+    		 height: auto;
+
+    		 background: rgba(255, 255, 255, 0.95);
+     		 backdrop-filter: blur(15px) saturate(180%);
+     		 -webkit-backdrop-filter: blur(15px) saturate(180%);
+
+    		 display: flex;
+      		 flex-direction: column;
+    		 align-items: center; /* Центрування кнопок по горизонталі */
+
+    		 padding: 25px 0;
+     		 border-top: 1px solid #f0f0f0;
+    		 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+
+    		 opacity: 0;
+    		 visibility: hidden;
+      		 transform: translateY(-10px);
+    		 transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+
+     		 z-index: 1001;
+     		 pointer-events: none;
             }
             
             .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
