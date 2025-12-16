@@ -416,8 +416,8 @@
             box-shadow: inset 1px 1px 3px rgba(20, 40, 80, 0.8);
         }
 
-        /* Benefits & Steps */
-        .benefits-section, .steps-section, .testimonials-section { margin-top: 50px; text-align: center; }
+        /* Benefits & Steps Spacing Updates */
+        .benefits-section { margin-top: 50px; text-align: center; }
         .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; max-width: 1100px; margin: 0 auto; }
         .benefit-card { 
             background: white; padding: 25px; border-radius: 16px; text-align: center; 
@@ -427,7 +427,15 @@
         .benefit-icon { width: 60px; height: 60px; background: #e0f7fa; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--secondary); font-size: 1.5rem; }
         .benefit-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 1.1rem; }
 
-        .steps-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; position: relative; max-width: 1000px; margin: 0 auto; }
+        /* 🔹 NEW: Spacing for Steps Section & Title */
+        .steps-section { 
+            margin-top: 80px; /* Increased from 50px */
+            text-align: center; 
+        }
+        .steps-container { 
+            display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; position: relative; max-width: 1000px; margin: 0 auto;
+            margin-top: 40px; /* Decreased from 60px (Desktop Middle Value) */
+        }
         .step-item { flex: 1; min-width: 150px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
         .step-circle { 
             width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; 
@@ -438,7 +446,8 @@
         .steps-line { position: absolute; top: 25px; left: 0; width: 100%; height: 2px; background: #e2e8f0; z-index: 1; }
         .step-item:last-child .step-circle { background: var(--prof-green); box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
 
-        /* Testimonials */
+        /* 🔹 NEW: Separation for Reviews Section */
+        .testimonials-section { margin-top: 100px; /* Increased separation */ text-align: center; }
         .testimonials-container { overflow: hidden; padding: 20px 0; text-align: left; max-width: 900px; margin: 0 auto; position: relative; }
         .leave-review-btn { 
             position: absolute; right: 0; display: inline-flex; align-items: center; gap: 8px; 
@@ -645,7 +654,6 @@
                 min-height: auto; 
                 padding-bottom: 0;
             }
-            /* 🔹 FIX: Smoother animation on mobile */
             .gallery { transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important; }
             
             .slide img { height: 240px; border-radius: 0 !important; }
@@ -673,16 +681,27 @@
             .header-phones-container { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; width: auto; }
             .header-phone-chip { flex-shrink: 0; margin: 2px; }
 
-            .steps-container { flex-direction: column; align-items: center; padding-left: 0; gap: 0; }
+            /* 🔹 UPDATED: Mobile Spacing for Steps */
+            .steps-container { 
+                flex-direction: column; align-items: center; padding-left: 0; gap: 0; 
+                margin-top: 25px; 
+            }
             .steps-line { display: none; }
-            .step-item { flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px; width: 100%; }
+            .step-item { 
+                flex-direction: column; align-items: center; text-align: center; 
+                margin-bottom: 40px; 
+                width: 100%; 
+            }
             .step-circle { margin-right: 0; margin-bottom: 10px; flex-shrink: 0; }
             .step-item p { text-align: center; margin: 0; padding: 0 10px; }
             
             .benefits-grid { grid-template-columns: 1fr; }
             .benefit-card { padding: 20px; display: flex; flex-direction: column; align-items: center; }
 
-            .benefits-section, .steps-section, .testimonials-section { margin-top: 90px; }
+            /* 🔹 UPDATED: Mobile Spacing for Sections */
+            .benefits-section { margin-top: 90px; }
+            .steps-section { margin-top: 120px; }
+            .testimonials-section { margin-top: 140px; /* 🔹 Increased Separation */ }
 
             .form-container { padding: 30px 20px 35px; position: relative; }
             .form-container h2 { font-size: 22px; margin-bottom: 15px; }
@@ -1009,7 +1028,7 @@
         <div class="contact-section">
             <div class="contact-bg-anim">
                 <div class="pattern-row move-left"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
-                <div class="pattern-row move-right"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
+                <div class="pattern-row move-right"><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span><span class="marquee-content">PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS PROFIL JOBS</span></div>
             </div>
 
             <div class="contact-header"><h2>Наші Контакти</h2><p class="contact-subtitle">Зв’яжіться з нами зручним для вас способом</p></div>
