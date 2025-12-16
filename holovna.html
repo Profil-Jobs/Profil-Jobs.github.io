@@ -340,12 +340,23 @@
             overflow: hidden; z-index: 5; cursor: grab;
         }
         .screen:active { cursor: grabbing; }
+        /* 
+           ВАЖЛИВО: scroll-snap для "послайдового" прокручування.
+           Користувач не зможе прокрутити список повністю одним рухом.
+        */
         .gallery-container-phone {
-            width: 100%; height: 100%; overflow-y: auto; scroll-snap-type: y mandatory;
-            scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;
+            width: 100%; height: 100%; overflow-y: auto; 
+            scroll-snap-type: y mandatory; /* Обов'язкова прив'язка */
+            scroll-behavior: smooth; 
+            scrollbar-width: none; -ms-overflow-style: none;
         }
         .gallery-container-phone::-webkit-scrollbar { display: none; }
-        .gallery-item { width: 100%; height: 100%; scroll-snap-align: start; flex-shrink: 0; }
+        
+        .gallery-item { 
+            width: 100%; height: 100%; 
+            scroll-snap-align: start; /* Зупинка на початку елемента */
+            flex-shrink: 0; 
+        }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; filter: brightness(0.95); }
         .cta-container { position: absolute; bottom: 40px; left: 0; right: 0; display: flex; justify-content: center; z-index: 30; pointer-events: none; }
         .tiktok-btn {
@@ -562,7 +573,7 @@
             }
             .iphone-15-pro { margin: 0 auto; }
             
-            /* Scroll fix for gallery on mobile */
+            /* Scroll fix for gallery on mobile (Snap Scroll) */
             .gallery-container-phone { scroll-snap-stop: always; }
 
             .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; padding: 0 20px; }
@@ -1175,19 +1186,21 @@
             if (phoneSlider) {
                 let autoScrollInterval;
 
-                // Stop function: clears interval and removes listeners
+                // Stop function: clears interval and removes listeners ONLY ON MOBILE
                 const stopAutoScroll = () => {
-                    if (autoScrollInterval) {
-                        clearInterval(autoScrollInterval);
-                        autoScrollInterval = null;
-                        // Once stopped by interaction, remove listeners so they don't fire again
-                        phoneSlider.removeEventListener('touchstart', stopAutoScroll);
-                        phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
-                        phoneSlider.removeEventListener('wheel', stopAutoScroll);
+                    if (window.innerWidth <= 768) { // Only stop on mobile
+                        if (autoScrollInterval) {
+                            clearInterval(autoScrollInterval);
+                            autoScrollInterval = null;
+                            // Once stopped by interaction, remove listeners so they don't fire again
+                            phoneSlider.removeEventListener('touchstart', stopAutoScroll);
+                            phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
+                            phoneSlider.removeEventListener('wheel', stopAutoScroll);
+                        }
                     }
                 };
 
-                // Add listeners for user interaction to stop auto-scroll PERMANENTLY
+                // Add listeners for user interaction to stop auto-scroll PERMANENTLY (mobile only)
                 phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
                 phoneSlider.addEventListener('pointerdown', stopAutoScroll);
                 phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
