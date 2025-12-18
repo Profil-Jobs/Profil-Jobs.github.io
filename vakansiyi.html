@@ -54,141 +54,78 @@
         .container-narrow { max-width: 1038px; margin: 0 auto; padding: 0 20px; }
 
         /* =========================================
-           NAVBAR (НОВА ВЕРСІЯ З CLEAN NAVBAR)
+           NAVBAR (НОВА ВЕРСІЯ)
            ========================================= */
         .navbar { 
-            position: fixed; 
-            top: 0; 
-            left: 0;
-            width: 100%;
-            
-            /* Стан 1: Спокій (прозорий зверху або білий без скла) */
-            background: rgba(255, 255, 255, 1); 
-            backdrop-filter: none; 
-            -webkit-backdrop-filter: none;
-            box-shadow: none; 
-            border-bottom: 1px solid transparent;
-
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: transparent; 
+            box-shadow: none; border-bottom: 1px solid transparent;
             z-index: 1000; 
-            transition: background 0.4s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
+            isolation: isolate; 
         }
 
-        /* Стан 2: Ефект скла (Clear Glass) при скролі */
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.75);
-            
-            /* Параметри скла */
+        /* ФОН СМУЖКИ */
+        .navbar::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: none; -webkit-backdrop-filter: none;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        /* СТАН ПРИ СКРОЛІ */
+        .navbar.scrolled::before {
+            background: rgba(255, 255, 255, 0.79); 
             backdrop-filter: blur(10px) saturate(160%); 
             -webkit-backdrop-filter: blur(10px) saturate(160%);
-            
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .navbar.nav-hidden {
-            transform: translateY(-100%);
-            box-shadow: none;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .nav-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;            
-            height: var(--navbar-height);
-            width: 100%;        
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 25px;                
-            position: relative;
+            display: flex; justify-content: space-between; align-items: center;            
+            height: var(--navbar-height); width: 100%; max-width: 1320px;
+            margin: 0 auto; padding: 0 25px; position: relative;
         }
 
-        /* --- ЛОГОТИП --- */
+        /* ЛОГОТИП */
         .logo { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 28.8px; 
-            line-height: 1;
-            color: var(--primary); 
-            text-decoration: none; 
-            font-weight: 700; 
-            z-index: 1002;
-            flex-shrink: 0; 
-            margin-right: auto;
-            display: inline-block; 
+            font-family: 'Playfair Display', serif; font-size: 28.8px; line-height: 1;
+            color: var(--primary); text-decoration: none; font-weight: 700; 
+            z-index: 1002; flex-shrink: 0; margin-right: auto; display: inline-block; 
         }
-
-        .logo::after { 
-            content: '®'; 
-            font-size: 0.6em;         
-            vertical-align: super;    
-            margin-left: 2px;         
-            font-weight: 700;
-        }
+        .logo::after { content: '®'; font-size: 0.6em; vertical-align: super; margin-left: 2px; font-weight: 700; }
 
         /* ПОСИЛАННЯ (DESKTOP) */
-        .nav-links { 
-            display: flex; 
-            gap: 12px; 
-            align-items: center;
-            height: 100%;
-        }
+        .nav-links { display: flex; gap: 12px; align-items: center; height: 100%; }
 
         .nav-links a { 
-            height: 37.75px; 
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 18px; 
-            background: var(--gradient); 
-            color: white; 
-            text-decoration: none; 
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 500; 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            border-radius: 50px; 
-            transition: all 0.3s ease;
-            white-space: nowrap;
+            height: 37.75px; display: inline-flex; align-items: center; justify-content: center;
+            padding: 0 18px; background: var(--gradient); color: white; 
+            text-decoration: none; font-family: 'Montserrat', sans-serif; 
+            font-weight: 500; font-size: 0.85rem; text-transform: uppercase; 
+            border-radius: 50px; transition: all 0.3s ease; white-space: nowrap;
         }
-
-        .nav-links a:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 8px 20px rgba(0,168,181,0.3); 
-        }
+        .nav-links a:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,168,181,0.3); }
 
         .hamburger { display: none; }
 
+        /* АДАПТИВ */
+        @media (max-width: 992px) { .nav-content { padding: 0 20px; } }
+
         /* --- MOBILE VERSION (MAX-WIDTH: 768px) --- */
         @media (max-width: 768px) {
-            .nav-content { padding: 0 20px; }
             .logo { font-size: 24px; }
-
+            
             .hamburger {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 5px;
-                width: 42px;
-                height: 38px;
-                border: 1px solid var(--primary);
-                border-radius: 8px;
-                padding: 0;
-                background: transparent;
-                cursor: pointer;
-                z-index: 1003;
-                margin: 0;
-                transition: all 0.3s ease;
+                display: flex; flex-direction: column; justify-content: center; align-items: center;
+                gap: 5px; width: 42px; height: 38px; border: 1px solid var(--primary);
+                border-radius: 8px; padding: 0; background: transparent; cursor: pointer;
+                z-index: 1003; transition: all 0.3s ease;
             }
-
-            .hamburger span {
-                display: block;
-                width: 20px;
-                height: 2px;
-                background-color: var(--primary);
-                border-radius: 2px;
-                transition: all 0.3s ease;
-            }
-
+            .hamburger span { display: block; width: 20px; height: 2px; background-color: var(--primary); border-radius: 2px; transition: all 0.3s ease; }
+            
             .hamburger.active { border-color: var(--burger-color); }
             .hamburger.active span { background-color: var(--burger-color); }
             .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -196,57 +133,31 @@
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
             .nav-links {
-                position: absolute; 
-                top: var(--navbar-height); 
-                left: 0;
-                width: 100%;
-                height: auto; 
-                
-                background: rgba(255, 255, 255, 0.85); 
-                backdrop-filter: blur(10px) saturate(160%);
-                -webkit-backdrop-filter: blur(10px) saturate(160%);
-                
-                flex-direction: column;
-                padding: 25px 0; 
-                
-                border-top: 1px solid #f0f0f0;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-                
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-10px);
-                transition: all 0.3s ease;
-                
-                z-index: 1001;
-                pointer-events: none;
+                position: fixed; 
+                top: var(--navbar-height); left: 0; width: 100%; height: auto;
+                background: rgba(255, 255, 255, 0.15); 
+                backdrop-filter: blur(8px) saturate(150%) contrast(108%);
+                -webkit-backdrop-filter: blur(8px) saturate(150%) contrast(108%);
+                border-top: 1px solid rgba(255,255,255,0.3);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                flex-direction: column; padding: 30px 0 45px 0; 
+                opacity: 0; visibility: hidden; transform: translateY(-10px);
+                transition: all 0.3s ease; 
+                z-index: 1001; pointer-events: none;
             }
-
-            .nav-links.active {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                pointer-events: auto;
-            }
-
+            
+            .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+            
             .nav-links a {
-                width: auto;
-                min-width: 180px;
-                max-width: 250px;
-                text-align: center;
-                padding: 10px 0;
-                margin: 5px 0;
-                
-                background: var(--gradient); /* Повернуто градієнт для мобільного */
-                color: white;
-                border: none;
-                
-                box-shadow: 0 4px 10px rgba(0, 168, 181, 0.2);
-                height: auto; 
+                width: auto; min-width: 180px; max-width: 250px; text-align: center;
+                padding: 12px 0; margin: 6px 0; 
+                background: var(--gradient); color: white; border: none;
+                box-shadow: 0 4px 15px rgba(0, 168, 181, 0.3); height: auto;
             }
         }
 
         /* =========================================
-           ІНШІ СТИЛІ (ПОВНИЙ КОНТЕНТ)
+           ІНШІ СТИЛІ
            ========================================= */
         header { position: relative; color: white; padding: 60px 0; text-align: center; overflow: hidden; border-bottom: 1px solid rgba(201, 179, 139, 0.3); }
         .premium-header { position: relative; background: linear-gradient(135deg, var(--primary) 0%, #007a87 100%); color: white; padding: 21px 0; text-align: center; overflow: hidden; border-bottom: 1px solid rgba(201, 179, 139, 0.3); height: 213px; display: flex; align-items: center; }
@@ -916,35 +827,35 @@
                     <div class="v-action-container"><a href="keyterynh.html" class="v-btn-details">Детальніше &rarr;</a></div>
                 </div>
 
-                <!-- 15 -->
+                <!-- 15 ОНОВЛЕНА ВАКАНСІЯ: Швачка -->
                 <div class="vacancy-card" 
-                     data-title="Швачка на автозавод"
-                     data-city="Żary"
+                     data-title="Швачка"
+                     data-city="Łódź"
                      data-salary="4880"
-                     data-tags="Виробництво Жінкам 8 год Проживання: надається Без досвіду"
-                     data-full-text="Umowa Zlecenie 30.50 zł шиття кабріолети">
+                     data-tags="Виробництво Жінкам Проживання: надається"
+                     data-full-text="Umowa Zlecenie 30.50 zł шиття">
                     <div class="v-header">
-                        <h3>Швачка на автозавод</h3>
+                        <h3>Швачка</h3>
                         <div class="v-badges-row">
-                            <div class="v-badge green"><i class="fas fa-car"></i> Виробництво</div>
-                            <div class="v-badge red"><i class="fas fa-female"></i> Для жінок</div>
+                            <div class="v-badge green"><i class="fas fa-industry"></i> Виробництво</div>
+                            <div class="v-badge red"><i class="fas fa-female"></i> Для жінок до 55 років</div>
                         </div>
                     </div>
                     <div class="v-salary-compact">
-                        <span class="salary-main">26.50–30.50 zł/год</span>
-                        <span class="salary-sub">4240–4880 zł/міс • 46 600–53 700 грн</span>
+                        <span class="salary-main">26.00–30.50 zł/год</span>
+                        <span class="salary-sub">≈ 4160–4880 zł/міс • ≈ 45 800–53 700 грн</span>
                     </div>
                     <div class="v-details-grid">
                         <div class="v-label"><i class="fas fa-clock"></i> Графік роботи:</div>
-                        <div class="v-value">2 зміни, 8 год/день, Пн–Пт</div>
+                        <div class="v-value">1 зміна, 8-14 год/день, Пн–Пт + Сб (160–240+ год/міс)</div>
                         <div class="v-label"><i class="fas fa-file-signature"></i> Трудовий договір:</div>
                         <div class="v-value">Umowa Zlecenie</div>
                         <div class="v-label"><i class="fas fa-home"></i> Проживання:</div>
                         <div class="v-value">надається</div>
                         <div class="v-label"><i class="fas fa-map-marker-alt"></i> Місце роботи:</div>
-                        <div class="v-value">Żary</div>
+                        <div class="v-value">Łódź, район Marianów</div>
                     </div>
-                    <div class="v-action-container"><a href="shvachka-na-avtozavod.html" class="v-btn-details">Детальніше &rarr;</a></div>
+                    <div class="v-action-container"><a href="shvachka.html" class="v-btn-details">Детальніше &rarr;</a></div>
                 </div>
 
                 <!-- 17 -->
@@ -997,41 +908,50 @@
     
     <div class="fading-divider"></div>
 
-    <!-- TESTIMONIALS -->
+    <!-- TESTIMONIALS (ОНОВЛЕНО) -->
     <div class="container">
         <div class="testimonials-section">
             <h2 class="premium-heading">Відгуки працівників</h2>
             <div class="heading-line"></div>
             <div class="testimonials-container">
                 <div class="testimonials-track">
+                    
+                    <!-- Відгук 1: Марія -->
                     <div class="review-card">
-                        <div class="review-avatar">О</div>
+                        <div class="review-avatar">М</div>
                         <div class="review-content">
-                            <div class="review-header"><div class="review-info"><h5>Олександр Петренко</h5><span class="review-date">3 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                            <div class="review-text">Нормальна агенція, оформили як домовлялись. Взяли на склад, робота різна, але нормально. Аванс видали майже одразу</div>
+                            <div class="review-header"><div class="review-info"><h5>Марія</h5><span class="review-date">Тиждень тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                            <div class="review-text">На початку не знала як то в Польші на цеху швачкою буде але цех чистий, хоча трохи шумить іноді. Платять досить добре і графік не складний швидко привикла</div>
                         </div>
                     </div>
+
+                    <!-- Відгук 2: Микола К. -->
                     <div class="review-card">
                         <div class="review-avatar" style="background:#74b9ff">М</div>
                         <div class="review-content">
-                            <div class="review-header"><div class="review-info"><h5>Марія Коваль</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div>
-                            <div class="review-text">Приїхала недавно, трохи хвилювалась, але на виробництві все добре. Робота не тяжка, інколи монотонна. Координатор довго відповідає, але пояснює нормально. Поки що все влаштовує</div>
+                            <div class="review-header"><div class="review-info"><h5>Микола К.</h5><span class="review-date">2 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div>
+                            <div class="review-text">Працюю на виробництві спочатку тяжко було втягнутись. Мову не всю розумів але з часом привик. Додаткові суботи то мені добре. Робота саме те на подроботку</div>
                         </div>
                     </div>
+
+                    <!-- Відгук 3: Олександр Петренко -->
                     <div class="review-card">
-                        <div class="review-avatar" style="background:#a29bfe">І</div>
+                        <div class="review-avatar" style="background:#a29bfe">О</div>
                         <div class="review-content">
-                            <div class="review-header"><div class="review-info"><h5>Іван Сидоренко</h5><span class="review-date">3 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                            <div class="review-text">На початку не все зрозумів через мову, але втягнувся. Умови нормальні, не ідеальні, але можна працювати. Якщо так піде, лишуся</div>
+                            <div class="review-header"><div class="review-info"><h5>Олександр Петренко</h5><span class="review-date">2 тижні тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                            <div class="review-text">Нормальна агенція, оформили як домовлялись. Взяли на склад, робота різна, але нормально. Аванс видали майже одразу</div>
                         </div>
                     </div>
+
+                    <!-- Відгук 4: Галина Савчук -->
                     <div class="review-card">
-                        <div class="review-avatar" style="background:#ff7675">Н</div>
+                        <div class="review-avatar" style="background:#ff7675">Г</div>
                         <div class="review-content">
-                            <div class="review-header"><div class="review-info"><h5>Наталія Бойко</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div>
-                            <div class="review-text">Думала, буде гірше. Житло чисте, трохи шумно. Робота на складі різна, інколи втомлююсь, але платять нормально. Звикла до графіка за кілька днів. Все ок</div>
+                            <div class="review-header"><div class="review-info"><h5>Галина Савчук</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div>
+                            <div class="review-text">Робота інколи устаєш но і так добре. Житло чисте хоч людей багато і трохи шумно. До графіка звикла за пару днів все ок. Дякую координатору Андрію за допомогу</div>
                         </div>
                     </div>
+
                 </div>
                 <div class="review-controls">
                     <div class="review-nav">
@@ -1180,18 +1100,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- MENU TOGGLE & SCROLL LOGIC (UPDATED) ---
+            // --- MENU TOGGLE & SCROLL LOGIC (ОНОВЛЕНО ДЛЯ НОВОГО NAVBAR) ---
             const navbar = document.getElementById('main-navbar');
             const hamburger = document.getElementById('hamburger-btn');
             const navLinks = document.getElementById('nav-links');
             
-            // Hamburger Logic
             if (hamburger && navLinks) {
                 hamburger.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
                     hamburger.classList.toggle('active');
                 });
-
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         navLinks.classList.remove('active');
@@ -1200,45 +1118,15 @@
                 });
             }
 
-            // Scroll Logic (Mobile Hide + Glass Effect)
-            let lastScrollTop = 0;
-            const delta = 5;
-            
+            // ЛОГІКА СКРОЛУ (З NAVBAR.HTML - тільки .scrolled клас)
             window.addEventListener('scroll', function() {
                 const st = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Add Scrolled Class (Glass Effect)
+                // Додаємо ефект "білої муті" при скролі
                 if (st > 10) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-
-                // Mobile Hide Logic
-                if (window.innerWidth > 768) {
-                    if (navbar) navbar.classList.remove('nav-hidden');
-                    return;
-                }
-
-                if (!navbar) return;
-                const navbarHeight = navbar.offsetHeight;
-                
-                // If menu is open, do not hide navbar
-                if (navLinks && navLinks.classList.contains('active')) {
-                    lastScrollTop = st;
-                    return;
-                }
-
-                if (Math.abs(lastScrollTop - st) <= delta) return;
-
-                if (st > lastScrollTop && st > navbarHeight) {
-                    navbar.classList.add('nav-hidden');
-                } else {
-                    if(st + window.innerHeight < document.body.scrollHeight) {
-                        navbar.classList.remove('nav-hidden');
-                    }
-                }
-                lastScrollTop = st;
             });
 
             // --- SEARCH FUNCTIONALITY ---
