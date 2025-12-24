@@ -110,6 +110,11 @@
         @media (max-width: 768px) {
             .logo { font-size: 24px; }
             
+            /* Логіка ховання панелі (Мобільна) */
+            .navbar.nav-hidden {
+                transform: translateY(-101%);
+            }
+
             /* Кнопка Гамбургер */
             .hamburger {
                 display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -173,7 +178,7 @@
         
         .btn-main { padding: 16px 32px; background: #1a3c5e; color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 12px 25px rgba(26, 60, 94, 0.25); display: inline-block; }
         .btn-main:hover { transform: translateY(-3px); background: var(--prof-green); box-shadow: 0 16px 35px rgba(39, 174, 96, 0.35); }
-        .btn-outline { padding: 16px 32px; background: transparent; color: #1a3c5e; border: 2px solid rgba(26, 60, 94, 0.15); border-radius: 50px; text-decoration: none; font-weight: 600; margin-left: 15px; transition: all 0.3s; display: inline-block; }
+        .btn-outline { padding: 16px 32px; background: transparent; color: #1a3c5e; border: 2px solid rgba(26, 60, 94, 0.15); border-radius: 50px; text-decoration: none; font-weight: 600; margin-left: 15px; transition: all 0.3; display: inline-block; }
         .btn-outline:hover { border-color: #1a3c5e; background: rgba(26, 60, 94, 0.05); }
         @keyframes fadeUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -282,27 +287,25 @@
         .form-group input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(0,168,181,0.2); }
         .input-icon { position: absolute; right: 12px; top: 38px; color: var(--secondary); opacity: 0.7; font-size: 14px; }
         
-        /* UPDATED: Slightly Smaller Font & Icon */
         .submit-btn { 
             width: 100%; padding: 14px; background: linear-gradient(90deg,#1e4a6e,#00a8b5); 
             color: white; border: none; border-radius: 8px; font-weight: 600; 
             cursor: pointer; transition: all 0.5s; box-shadow: 0 5px 15px rgba(0,119,182,0.3); 
             position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
-            font-size: 14px; /* Reduced from 16px */
+            font-size: 14px;
         }
         .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,119,182,0.4); }
         
-        /* UPDATED: Slightly Smaller Icon */
         .icon-animate { 
             margin-left: 10px; 
-            font-size: 13px; /* Reduced from 15px */
+            font-size: 13px;
             transition: transform 0.3s ease; 
         }
         .submit-btn:hover .icon-animate { transform: translateX(3px); }
         .brand-signature { position: absolute; bottom: 12px; right: 15px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 14px; color: var(--primary); letter-spacing: 0.8px; }
 
         /* =========================================
-           IPHONE WIDGET (NEW)
+           IPHONE WIDGET
            ========================================= */
         .iphone-widget-wrapper {
             display: flex; flex-direction: column; align-items: center; gap: 25px;
@@ -354,13 +357,9 @@
             overflow: hidden; z-index: 5; cursor: grab;
         }
         .screen:active { cursor: grabbing; }
-        /* 
-           ВАЖЛИВО: scroll-snap для "послайдового" прокручування.
-           Користувач не зможе прокрутити список повністю одним рухом.
-        */
         .gallery-container-phone {
             width: 100%; height: 100%; overflow-y: auto; 
-            scroll-snap-type: y mandatory; /* Обов'язкова прив'язка */
+            scroll-snap-type: y mandatory;
             scroll-behavior: smooth; 
             scrollbar-width: none; -ms-overflow-style: none;
         }
@@ -368,7 +367,8 @@
         
         .gallery-item { 
             width: 100%; height: 100%; 
-            scroll-snap-align: start; /* Зупинка на початку елемента */
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
             flex-shrink: 0; 
         }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; filter: brightness(0.95); }
@@ -503,23 +503,195 @@
         @keyframes swing-flipped { 0%{transform:scaleX(-1) rotate(0deg)} 25%{transform:scaleX(-1) rotate(10deg)} 50%{transform:scaleX(-1) rotate(-10deg)} 75%{transform:scaleX(-1) rotate(5deg)} 100%{transform:scaleX(-1) rotate(0deg)} }
         @keyframes pinDrop { 0% { transform: translateY(0); } 25% { transform: translateY(-12px); } 45% { transform: translateY(0); } 60% { transform: translateY(-6px); } 75% { transform: translateY(0); } 90% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
 
-        footer { background: linear-gradient(to top,#0a1e33,#1a3c5e); color: white; padding-top: 30px; margin-top: 40px; border-top: none; display: flex; flex-direction: column; align-items: center; }
-        .footer-content-centered { text-align: center; max-width: 800px; padding: 0 20px; margin-bottom: 15px; }
-        .footer-content-centered h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 6px; letter-spacing: 1px; }
-        .footer-content-centered p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px; }
-        .social-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .social-link-footer { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); color: white; background: transparent; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; }
-        .social-link-footer:hover { background: white; color: var(--secondary); border-color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,168,181,0.3); }
-        .footer-laconic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0; width: 100%; }
-        .footer-laconic-links a { color: white; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; transition: opacity 0.3s; }
-        .footer-laconic-links a:hover { opacity: 1; text-decoration: underline; }
-        .footer-contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.85rem; opacity: 0.9; margin-bottom: 15px; }
-        .footer-contact-row span { display: flex; align-items: center; gap: 6px; }
-        .footer-contact-row i { color: var(--secondary); font-size: 1.1em; }
-        .footer-bottom-bar { background: #05101c; padding: 12px 0; width: 100%; font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; justify-content: center; }
-        .footer-bottom-content { max-width: 1320px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
-        .footer-bottom-links a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 20px; transition: color 0.3s; }
-        .footer-bottom-links a:hover { color: white; }
+        /* =========================================
+           ФУТЕР (НОВА ВЕРСІЯ)
+           ========================================= */
+        footer { 
+            background: linear-gradient(to top,#0a1e33,#1a3c5e); 
+            color: white; 
+            padding-top: 30px; 
+            border-top: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .footer-content-centered { 
+            text-align: center; 
+            max-width: 800px; 
+            padding: 0 20px; 
+            margin-bottom: 15px; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer-content-centered h3 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.6rem; 
+            margin-bottom: 6px; 
+            letter-spacing: 1px; 
+            margin-top: 0;
+        }
+
+        .footer-content-centered p { 
+            font-size: 0.9rem; 
+            opacity: 0.8; 
+            margin-bottom: 20px; 
+        }
+
+        .social-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+
+        .social-link-footer { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 50%; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            color: white; 
+            background: transparent; 
+            font-size: 1.1rem; 
+            transition: all 0.3s ease; 
+            text-decoration: none; 
+        }
+
+        .social-link-footer:hover { 
+            background: white; 
+            color: var(--secondary); 
+            border-color: white; 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,168,181,0.3); 
+        }
+
+        .footer-laconic-links { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding: 15px 0; 
+            width: 100%; 
+        }
+
+        .footer-laconic-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            opacity: 0.8; 
+            transition: opacity 0.3s; 
+        }
+
+        .footer-laconic-links a:hover { 
+            opacity: 1; 
+            text-decoration: underline; 
+        }
+
+        .footer-divider {
+            color: rgba(255,255,255,0.3);
+            display: inline; 
+        }
+
+        .footer-contact-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            font-size: 0.85rem; 
+            opacity: 0.9; 
+            margin-bottom: 15px; 
+        }
+
+        .footer-contact-row span { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+        }
+
+        .footer-contact-row i { 
+            color: var(--secondary); 
+            font-size: 1.1em; 
+        }
+
+        .footer-bottom-bar { 
+            background: #05101c; 
+            padding: 12px 0; 
+            width: 100%; 
+            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.5); 
+            display: flex; 
+            justify-content: center; 
+        }
+
+        .footer-bottom-content { 
+            max-width: 1320px; 
+            width: 100%; 
+            padding: 0 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-sizing: border-box;
+        }
+
+        .footer-bottom-links a { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            transition: color 0.3s; 
+        }
+
+        .footer-bottom-links a:hover { 
+            color: white; 
+        }
+
+        /* --- АДАПТИВ ФУТЕРА (MOBILE) --- */
+        @media (max-width: 768px) {
+            .footer-bottom-content {
+                flex-direction: column; 
+                gap: 10px; 
+                text-align: center; 
+                padding: 0 20px;
+            }
+            
+            .footer-bottom-links a { 
+                margin: 0 10px; 
+            }
+            
+            .footer-contact-row { 
+                flex-direction: row; 
+                flex-wrap: wrap;     
+                justify-content: center;
+                gap: 10px;           
+            }
+
+            .contact-email {
+                width: 100%;
+                justify-content: center; 
+                margin-top: 5px;         
+                order: 3;                
+            }
+
+            .contact-address, .contact-phone {
+                order: 1; 
+            }
+            
+            .footer-divider { 
+                display: none; 
+            }
+        }
+
         .back-to-top { position: fixed; bottom: 30px; right: 40px; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: rgba(0, 168, 181, 0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.3); color: white; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 999; cursor: pointer; text-decoration: none; }
         .back-to-top:hover { transform: translateY(-5px); background: rgba(0, 168, 181, 0.9); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .back-to-top.show { opacity: 1; visibility: visible; }
@@ -580,18 +752,15 @@
             .cta-bottom-block { flex-direction: column; gap: 15px; }
             .cta-text-wrapper, .cta-bottom-block .apply-btn-modern { width: 100%; max-width: 320px; }
             
-            /* iPhone Widget Mobile Fixes */
             .iphone-widget-wrapper { 
-                padding: 20px 0; 
-                overflow-x: hidden;
+                padding: 20px 0 60px 0; 
+                overflow: visible !important;
             }
             .iphone-15-pro { margin: 0 auto; }
             
-            /* Scroll fix for gallery on mobile (Snap Scroll) */
             .gallery-container-phone { scroll-snap-stop: always; }
-
-            .footer-bottom-content { flex-direction: column; gap: 15px; text-align: center; padding: 0 20px; }
-            .footer-bottom-links a { margin: 0 10px; }
+            
+            .contact-column-left .contact-btn { padding-left: 40px !important; justify-content: flex-start !important; }
         }
 
         @media (max-width: 480px) {
@@ -606,7 +775,7 @@
 </head>
 <body>
 
-    <!-- === NEW CLEAN NAVBAR (FROM NAVBAR.HTML) === -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="main-navbar">
         <div class="nav-content">
             <a href="holovna.html" class="logo">PROFIL JOBS</a>
@@ -669,7 +838,6 @@
 
     <!-- MAIN CONTENT -->
     <div class="container main-layout">
-        <!-- LEFT COLUMN: CONTENT -->
         <div class="content-col">
             <!-- HOT VACANCIES -->
             <section class="hot-vacancies-section">
@@ -681,7 +849,6 @@
                             <h2 class="hv-title">Гарячі вакансії</h2>
                         </div>
                         <div class="hv-cards-grid">
-                            <!-- Card 1 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -696,7 +863,6 @@
                                 </div>
                                 <a href="montuvannya-detaley-na-avtozavod-bmw-mini-mercedes.html" class="hv-card-link">Детальніше &rarr;</a>
                             </div>
-                            <!-- Card 2 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -711,7 +877,6 @@
                                 </div>
                                 <a href="tapitser-na-meblevu-fabryku.html" class="hv-card-link">Детальніше &rarr;</a>
                             </div>
-                            <!-- Card 3 -->
                             <div class="hv-card">
                                 <div class="hv-card-left">
                                     <div class="hv-card-top">
@@ -734,7 +899,6 @@
                 </div>
             </section>
 
-            <!-- BIG WHITE BOX -->
             <div class="big-white-container">
                 <div class="why-us-block" style="margin-top:0;">
                     <h4>Чому обирають саме нас?</h4>
@@ -763,7 +927,7 @@
                     <div class="faq-item"><button class="faq-question">Який графік роботи — мінімальні години та робота понаднормово? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Мінімум — 40 годин/тиждень. Але завжди є можливість працювати більше для вищого заробітку.</p></div></div>
                     <div class="faq-item"><button class="faq-question">Скільки часу займає працевлаштування? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Зазвичай процес працевлаштування займає від 1 до 3 днів після першої консультації, якщо всі документи готові. Після цього потрібно врахувати ще час на доїзд з України до місця роботи.</p></div></div>
                     <div class="faq-item"><button class="faq-question">Коли перша зарплата? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Графік виплат залежить від конкретного роботодавця. У більшості випадків перша зарплата виплачується через 2–4 тижні після початку роботи. Але аванси переважно доступні вже з 5 відпрацьованих змін.</p></div></div>
-                    <div class="faq-item"><button class="faq-question">Які гарантії, якщо робота не підійде або чи можна довіряти компанії? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Ми працюємо лише з ліцензованими роботодавцями. Якщо робота не підійде, ми оперативно та безкоштовно запропонуємо іншу вакансію.</p></div></div>
+                    <div class="faq-item"><button class="faq-question">Які гарантії, якщо робота не підійде або чи можна довіряти компанії? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Ми працюємо лише з ліцензованими роботодавцями. Якщо робота не підійде, we оперативно та безкоштовно запропонуємо іншу вакансію.</p></div></div>
                 </div>
 
                 <div class="cta-bottom-block">
@@ -773,7 +937,6 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: SIDEBAR -->
         <div class="sidebar-col interactive-blocks">
             <!-- FORM -->
             <form class="form-container" id="contact-form" action="https://formspree.io/f/mldbagyo" method="POST">
@@ -807,7 +970,7 @@
                 <div class="brand-footer"><strong>PROFIL JOBS®</strong> - професійні рішення для вашої кар’єри</div>
             </div>
 
-            <!-- IPHONE WIDGET (UPDATED) -->
+            <!-- IPHONE WIDGET -->
             <div class="iphone-widget-wrapper">
                 <h3 class="iphone-widget-title">Ми у TikTok</h3>
                 <div class="iphone-15-pro">
@@ -896,32 +1059,36 @@
                 <div class="heading-line"></div>
                 <div class="testimonials-container">
                     <div class="testimonials-track">
+                        <!-- Review 1 -->
                         <div class="review-card">
-                            <div class="review-avatar">О</div>
+                            <div class="review-avatar">М</div>
                             <div class="review-content">
-                                <div class="review-header"><div class="review-info"><h5>Олександр Петренко</h5><span class="review-date">3 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                                <div class="review-text">Нормальна агенція, оформили як домовлялись. Взяли на склад, робота різна, але нормально. Аванс видали майже одразу</div>
+                                <div class="review-header"><div class="review-info"><h5>Марія</h5><span class="review-date">Тиждень тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                                <div class="review-text">На початку не знала як то в Польші на цеху швачкою буде але цех чистий, хоча трохи шумить іноді. Платять досить добре і графік не складний швидко привикла</div>
                             </div>
                         </div>
+                        <!-- Review 2 -->
                         <div class="review-card">
                             <div class="review-avatar" style="background:#74b9ff">М</div>
                             <div class="review-content">
-                                <div class="review-header"><div class="review-info"><h5>Марія Коваль</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div>
-                                <div class="review-text">Приїхала недавно, трохи хвилювалась, але на виробництві все добре. Робота не тяжка, інколи монотонна. Координатор довго відповідає, але пояснює нормально. Поки що все влаштовує</div>
+                                <div class="review-header"><div class="review-info"><h5>Микола К.</h5><span class="review-date">2 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div>
+                                <div class="review-text">Працюю на виробництві спочатку тяжко було втягнутись. Мову не всю розумів але з часом привик. Додаткові суботи то мені добре. Робота саме те на подроботку</div>
                             </div>
                         </div>
+                        <!-- Review 3 -->
                         <div class="review-card">
-                            <div class="review-avatar" style="background:#a29bfe">І</div>
+                            <div class="review-avatar" style="background:#a29bfe">О</div>
                             <div class="review-content">
-                                <div class="review-header"><div class="review-info"><h5>Іван Сидоренко</h5><span class="review-date">3 місяці тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                                <div class="review-text">На початку не все зрозумів через мову, але втягнувся. Умови нормальні, не ідеальні, але можна працювати. Якщо так піде, лишуся</div>
+                                <div class="review-header"><div class="review-info"><h5>Олександр Петренко</h5><span class="review-date">2 тижні тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                                <div class="review-text">Нормальна агенція, оформили як домовлялись. Взяли на склад, робота різна, але нормально. Аванс видали майже одразу</div>
                             </div>
                         </div>
+                        <!-- Review 4 -->
                         <div class="review-card">
-                            <div class="review-avatar" style="background:#ff7675">Н</div>
+                            <div class="review-avatar" style="background:#ff7675">Г</div>
                             <div class="review-content">
-                                <div class="review-header"><div class="review-info"><h5>Наталія Бойко</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div>
-                                <div class="review-text">Думала, буде гірше. Житло чисте, трохи шумно. Робота на складі різна, інколи втомлююсь, але платять нормально. Звикла до графіка за кілька днів. Все ок</div>
+                                <div class="review-header"><div class="review-info"><h5>Галина Савчук</h5><span class="review-date">1 місяць тому</span></div><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div>
+                                <div class="review-text">Робота інколи устаєш но і так добре. Житло чисте хоч людей багато і трохи шумно. До графіка звикла за пару днів все ок. Дякую координатору Андрію за допомогу</div>
                             </div>
                         </div>
                     </div>
@@ -992,31 +1159,37 @@
         <div class="footer-content-centered">
             <h3>PROFIL JOBS</h3>
             <p>Ліцензоване кадрове агентство з багаторічним досвідом працевлаштування в Польщі.</p>
+            
             <div class="social-icons">
-                <a href="https://t.me/ProfilJobs" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="viber://chat?number=+48660962345" target="_blank" rel="noopener noreferrer" class="social-link-footer" aria-label="Viber"><i class="fab fa-viber"></i></a>
+                <a href="https://t.me/ProfilJobs" target="_blank" class="social-link-footer"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="social-link-footer"><i class="fab fa-tiktok"></i></a>
+                <a href="viber://chat?number=+48660962345" target="_blank" class="social-link-footer"><i class="fab fa-viber"></i></a>
             </div>
+
             <div class="footer-laconic-links">
                 <a href="holovna.html">Головна</a>
                 <a href="vakansiyi.html">Вакансії</a>
                 <a href="pro-nas.html">Про нас</a>
                 <a href="bloh.html">Блог</a>
-                <span style="color:rgba(255,255,255,0.3)">|</span>
+                
+                <span class="footer-divider">|</span>
+                
                 <a href="polityka-konfidentsiynosti.html">Політика конфіденційності</a>
                 <a href="umovy-vykorystannya.html">Умови використання</a>
                 <a href="cookies.html">Cookies</a>
                 <a href="license.html">Ліцензія</a>
             </div>
+
             <div class="footer-contact-row">
-                <span><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
-                <span><i class="fas fa-phone"></i> +48 660 962 345</span>
-                <span><i class="fas fa-envelope"></i> nicholasstascompany@gmail.com</span>
+                <span class="contact-address"><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
+                <span class="contact-phone"><i class="fas fa-phone"></i> +48 660 962 345</span>
+                <span class="contact-email"><i class="fas fa-envelope"></i> nicholasstascompany@gmail.com</span>
             </div>
         </div>
+
         <div class="footer-bottom-bar">
             <div class="footer-bottom-content">
-                <div>© 2025 NicholaStas — всі права захищено / wszelkie prawa zastrzeżone</div>
+                <div>© 2025 NicholaStas — всі права захищено / wszelkie права zastrzeżone</div>
                 <div class="footer-bottom-links">
                     <a href="bezpeka.html">Безпека</a>
                     <a href="dopomoha.html">Допомога</a>
@@ -1030,14 +1203,11 @@
     <!-- SCRIPTS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // =========================================
-            // 1. UPDATED NAVBAR LOGIC (FROM NAVBAR.HTML)
-            // =========================================
+            // NAVBAR LOGIC
             const navbar = document.getElementById('main-navbar');
             const hamburger = document.getElementById('hamburger-btn');
             const navLinks = document.getElementById('nav-links');
 
-            // --- МЕНЮ БУРГЕР ---
             if (hamburger && navLinks) {
                 hamburger.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
@@ -1051,10 +1221,8 @@
                 });
             }
 
-            // --- ЛОГІКА СКРОЛУ ---
             window.addEventListener('scroll', function() {
                 const st = window.pageYOffset || document.documentElement.scrollTop;
-                // Додаємо ефект "білої муті" (0.79) при скролі
                 if (st > 10) {
                     navbar.classList.add('scrolled');
                 } else {
@@ -1062,10 +1230,21 @@
                 }
             }, { passive: true });
 
-
-            // =========================================
-            // 2. EXISTING SITE LOGIC
-            // =========================================
+            // СКРОЛ-ХОВАННЯ ПАНЕЛІ (Мобільна версія)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                if (window.innerWidth > 768) return;
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+                const navbarElement = document.querySelector('.navbar');
+                const mobileMenuOpen = document.querySelector('.nav-links')?.classList.contains('active');
+                if (mobileMenuOpen) return;
+                if (st > lastScrollTop && st > 100) {
+                    navbarElement.classList.add('nav-hidden');
+                } else if (st < lastScrollTop) {
+                    navbarElement.classList.remove('nav-hidden');
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            }, { passive: true });
 
             // CLOCK
             function updateClocks() {
@@ -1143,7 +1322,7 @@
             });
             calculateSalary();
 
-            // TESTIMONIALS
+            // TESTIMONIALS SLIDER
             const reviewTrack = document.querySelector('.testimonials-track');
             const reviews = document.querySelectorAll('.review-card');
             const prevReviewBtn = document.querySelector('.prev-review');
@@ -1183,10 +1362,7 @@
                 backToTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
 
-            // =========================================
-            // IPHONE WIDGET LOGIC (UPDATED)
-            // =========================================
-            // Shared Drive Fetch Logic
+            // IPHONE TIKTOK WIDGET
             const API_KEY = 'AIzaSyCJkTASOzVjPBboGFOkTU1nfMRD-iUuaF0';
             const fetchDriveFiles = async (folderId) => {
                 try {
@@ -1199,31 +1375,24 @@
             const phoneSlider = document.getElementById('gallery-phone');
             if (phoneSlider) {
                 let autoScrollInterval;
-
-                // Stop function: clears interval and removes listeners ONLY ON MOBILE
                 const stopAutoScroll = () => {
-                    if (window.innerWidth <= 768) { // Only stop on mobile
+                    if (window.innerWidth <= 768) {
                         if (autoScrollInterval) {
                             clearInterval(autoScrollInterval);
                             autoScrollInterval = null;
-                            // Once stopped by interaction, remove listeners so they don't fire again
                             phoneSlider.removeEventListener('touchstart', stopAutoScroll);
                             phoneSlider.removeEventListener('pointerdown', stopAutoScroll);
                             phoneSlider.removeEventListener('wheel', stopAutoScroll);
                         }
                     }
                 };
-
-                // Add listeners for user interaction to stop auto-scroll PERMANENTLY (mobile only)
                 phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
                 phoneSlider.addEventListener('pointerdown', stopAutoScroll);
                 phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
 
-                // Function to start scrolling
                 const startAutoScroll = () => {
                     autoScrollInterval = setInterval(() => {
                         const { scrollTop, scrollHeight, clientHeight } = phoneSlider;
-                        // Logic to prevent black screen: if at bottom, jump to top
                         if (scrollTop + clientHeight >= scrollHeight - 10) {
                             phoneSlider.scrollTo({ top: 0, behavior: 'smooth' });
                         } else {
@@ -1232,12 +1401,9 @@
                     }, 3000);
                 };
 
-                // Fetch and Populate Dynamically
                 fetchDriveFiles('1ZOrUJ64ntSCeFh8ze7d86Iu6pghye023').then(files => {
                     if (files.length) {
-                        // Clear any existing placeholders
                         phoneSlider.innerHTML = '';
-                        
                         const fragment = document.createDocumentFragment();
                         files.forEach(f => {
                             if (f.thumbnailLink) {
@@ -1248,8 +1414,6 @@
                             }
                         });
                         phoneSlider.appendChild(fragment);
-                        
-                        // Start auto-scroll ONLY after content is loaded
                         startAutoScroll();
                     }
                 });
