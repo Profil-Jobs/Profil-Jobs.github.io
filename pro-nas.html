@@ -65,7 +65,7 @@
 
         /* СТАН 2: При скролі - Біла муть 0.80 */
         .navbar.scrolled::before {
-            background: rgba(255, 255, 255, 0.79); 
+            background: rgba(255, 255, 255, 0.75); 
             
             backdrop-filter: blur(10px) saturate(160%); 
             -webkit-backdrop-filter: blur(10px) saturate(160%);
@@ -347,7 +347,10 @@
         .contact-column-left { display: flex; flex-direction: column; gap: 12px; height: 100%; } 
         .contact-column-right { display: flex; flex-direction: column; gap: 12px; }
         .contact-btn, .office-card { display: flex; align-items: center; padding: 20px 40px; background: var(--card-fill); border-radius: 20px; box-shadow: 0px 4px 15px rgba(0,0,0,0.05); text-decoration: none; color: var(--primary); transition: all 0.25s ease; position: relative; z-index: 1; overflow: hidden; border: 1px solid var(--card-border); }
+        
+        /* COMPUTER VERSION (RESTORED) */
         .contact-column-left .contact-btn { padding-left: 100px; justify-content: flex-start; }
+        
         .contact-btn:hover, .office-card:hover { transform: translateY(-2px); box-shadow: 0px 8px 22px rgba(0,0,0,0.08); background: #fff; }
         .contact-btn:hover .contact-text-val { color: var(--secondary); }
         .icon-box { width: 45px; min-width: 45px; height: 45px; background: var(--icon-bg); box-shadow: 0 0 20px rgba(0,0,0,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 25px; flex-shrink: 0; }
@@ -376,32 +379,166 @@
         .map-container:hover iframe { filter: none; }
 
         /* CONTACT ICONS ANIMATIONS */
-        @keyframes glitch-icon { 0%{opacity:1;filter:none;transform:translateX(0)}10%{opacity:.8;filter:drop-shadow(-3px 0 0 rgba(255,0,0,.7)) drop-shadow(3px 0 0 rgba(0,255,255,.7));transform:translateX(-2px)}20%{opacity:.6;filter:drop-shadow(-5px 0 0 rgba(255,0,255,.7)) drop-shadow(5px 0 0 rgba(0,255,0,.7)) brightness(1.5);transform:translateX(2px)}30%{opacity:.4;filter:drop-shadow(0 -3px 0 rgba(255,0,0,.7)) drop-shadow(0 3px 0 rgba(0,0,255,.7)) contrast(2)}40%{opacity:.3;filter:drop-shadow(-2px -2px 0 rgba(255,0,0,.7)) drop-shadow(2px 2px 0 rgba(0,255,255,.7)) hue-rotate(90deg)}50%{opacity:.2;filter:drop-shadow(0 0 5px rgba(255,255,255,.5)) brightness(.5) contrast(3)}60%{opacity:.4;filter:drop-shadow(-3px 0 0 rgba(0,255,0,.7)) drop-shadow(3px 0 0 rgba(255,0,255,.7)) hue-rotate(-90deg)}70%{opacity:.6;filter:drop-shadow(0 -2px 0 rgba(255,255,255,.7)) drop-shadow(0 2px 0 rgba(0,255,0,.7)) brightness(1.2)}80%{opacity:.8;filter:drop-shadow(-4px 0 0 rgba(0,0,255,.7)) drop-shadow(4px 0 0 rgba(255,255,0,.7)) contrast(1.5)}90%{opacity:.9;filter:drop-shadow(0 0 3px rgba(255,0,0,.7)) brightness(.8)}100%{opacity:1;filter:none;transform:translateX(0)} }
-        @keyframes swing-flipped { 0%{transform:scaleX(-1) rotate(0deg)} 25%{transform:scaleX(-1) rotate(10deg)} 50%{transform:scaleX(-1) rotate(-10deg)} 75%{transform:scaleX(-1) rotate(5deg)} 100%{transform:scaleX(-1) rotate(0deg)} }
+        @keyframes glitch-icon { 0%{opacity:1;filter:none;transform:translateX(0)}10%{opacity:.8;filter:drop-shadow(-3px 0 0 rgba(255,0,0,.7)) drop-shadow(3px 0 0 rgba(0,255,255,.7));transform:translateX(-2px)}20%{opacity:.6;filter:drop-shadow(-5px 0 0 rgba(255,0,255,.7)) drop-shadow(5px 0 0 rgba(0,255,0,.7)) brightness(1.5);transform:translateX(2px)}30%{opacity:.4;filter:drop-shadow(0 -3px 0 rgba(255,0,0,.7)) drop-shadow(0 3px 0 rgba(0,255,255,.7)) contrast(2)}40%{opacity:.3;filter:drop-shadow(-2px -2px 0 rgba(255,0,0,.7)) drop-shadow(2px 2px 0 rgba(0,255,255,.7)) hue-rotate(90deg)}50%{opacity:.2;filter:drop-shadow(0 0 5px rgba(255,255,255,.5)) brightness(.5) contrast(3)}60%{opacity:.4;filter:drop-shadow(-3px 0 0 rgba(0,255,0,.7)) drop-shadow(3px 0 0 rgba(255,0,255,.7)) hue-rotate(-90deg)}70%{opacity:.6;filter:drop-shadow(0 -2px 0 rgba(255,255,255,.7)) drop-shadow(0 2px 0 rgba(0,255,0,.7)) brightness(1.2)}80%{opacity:.8;filter:drop-shadow(-4px 0 0 rgba(0,0,255,.7)) drop-shadow(4px 0 0 rgba(255,255,0,.7)) contrast(1.5)}90%{opacity:.9;filter:drop-shadow(0 0 3px rgba(255,0,0,.7)) brightness(.8)}100%{opacity:1;filter:none;transform:translateX(0)} }
+        @keyframes swing-flipped { 0%{transform:scaleX(-1) rotate(0deg)} 25%{transform:scaleX(-1) rotate(10deg)} 50%{transform:scaleX(-1) rotate(-10deg)} 75%{transform:scaleX(-1) rotate(5deg)}100%{transform:scaleX(-1) rotate(0deg)} }
         @keyframes pinDrop { 0% { transform: translateY(0); } 25% { transform: translateY(-12px); } 45% { transform: translateY(0); } 60% { transform: translateY(-6px); } 75% { transform: translateY(0); } 90% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
 
         .contact-btn.social:hover .icon-box i { animation: glitch-icon 0.75s linear; }
         .contact-btn.phone:hover .icon-box i { animation: swing-flipped 0.5s ease-in-out; }
         .office-card:hover .icon-box i { animation: pinDrop 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1; }
 
-        /* FOOTER */
-        footer { background: linear-gradient(to top,#0a1e33,#1a3c5e); color: white; padding-top: 30px; margin-top: 40px; border-top: none; display: flex; flex-direction: column; align-items: center; }
-        .footer-content-centered { text-align: center; max-width: 800px; padding: 0 20px; margin-bottom: 15px; }
-        .footer-content-centered h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 6px; letter-spacing: 1px; }
-        .footer-content-centered p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px; }
-        .social-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .social-link-footer { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); color: white; background: transparent; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; }
-        .social-link-footer:hover { background: white; color: var(--secondary); border-color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,168,181,0.3); }
-        .footer-laconic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0; width: 100%; }
-        .footer-laconic-links a { color: white; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; transition: opacity 0.3s; }
-        .footer-laconic-links a:hover { opacity: 1; text-decoration: underline; }
-        .footer-contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 0.85rem; opacity: 0.9; margin-bottom: 15px; }
-        .footer-contact-row span { display: flex; align-items: center; gap: 6px; }
-        .footer-contact-row i { color: var(--secondary); font-size: 1.1em; }
-        .footer-bottom-bar { background: #05101c; padding: 12px 0; width: 100%; font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; justify-content: center; }
-        .footer-bottom-content { max-width: 1320px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
-        .footer-bottom-links a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 20px; transition: color 0.3s; }
-        .footer-bottom-links a:hover { color: white; }
+        /* =========================================
+           ФУТЕР (НОВА ВЕРСІЯ)
+           ========================================= */
+        footer { 
+            background: linear-gradient(to top,#0a1e33,#1a3c5e); 
+            color: white; 
+            padding-top: 30px; 
+            border-top: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .footer-content-centered { 
+            text-align: center; 
+            max-width: 800px; 
+            padding: 0 20px; 
+            margin-bottom: 15px; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer-content-centered h3 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.6rem; 
+            margin-bottom: 6px; 
+            letter-spacing: 1px; 
+            margin-top: 0;
+        }
+
+        .footer-content-centered p { 
+            font-size: 0.9rem; 
+            opacity: 0.8; 
+            margin-bottom: 20px; 
+        }
+
+        .social-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+
+        .social-link-footer { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 50%; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            color: white; 
+            background: transparent; 
+            font-size: 1.1rem; 
+            transition: all 0.3s ease; 
+            text-decoration: none; 
+        }
+
+        .social-link-footer:hover { 
+            background: white; 
+            color: var(--secondary); 
+            border-color: white; 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,168,181,0.3); 
+        }
+
+        .footer-laconic-links { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding: 15px 0; 
+            width: 100%; 
+        }
+
+        .footer-laconic-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            opacity: 0.8; 
+            transition: opacity 0.3s; 
+        }
+
+        .footer-laconic-links a:hover { 
+            opacity: 1; 
+            text-decoration: underline; 
+        }
+
+        .footer-divider {
+            color: rgba(255,255,255,0.3);
+            display: inline; 
+        }
+
+        .footer-contact-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            font-size: 0.85rem; 
+            opacity: 0.9; 
+            margin-bottom: 15px; 
+        }
+
+        .footer-contact-row span { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+        }
+
+        .footer-contact-row i { 
+            color: var(--secondary); 
+            font-size: 1.1em; 
+        }
+
+        .footer-bottom-bar { 
+            background: #05101c; 
+            padding: 12px 0; 
+            width: 100%; 
+            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.5); 
+            display: flex; 
+            justify-content: center; 
+        }
+
+        .footer-bottom-content { 
+            max-width: 1320px; 
+            width: 100%; 
+            padding: 0 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-sizing: border-box;
+        }
+
+        .footer-bottom-links a { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            transition: color 0.3s; 
+        }
+
+        .footer-bottom-links a:hover { 
+            color: white; 
+        }
 
         /* ADAPTIVE STYLES (TABLET / SMALL DESKTOP) */
         @media (max-width: 992px) {
@@ -411,9 +548,11 @@
             .hero-content-right { width: 100%; text-align: center; padding-left: 0; border-left: none; border-top: 4px solid var(--secondary); padding-top: 20px; }
             .hero-title-pro { font-size: 2.2rem; }
             .stats-grid { grid-template-columns: 1fr; gap: 40px; }
-            /* Contact grid stacking logic is here - preserved */
+            
+            /* PHONE/TABLET VERSION ALIGNMENT (FIXED) */
             .contact-grid { grid-template-columns: 1fr; }
-            .contact-column-left .contact-btn { padding-left: 20px; justify-content: center; }
+            .contact-column-left .contact-btn { padding-left: 40px; justify-content: flex-start; }
+            
             .timeline-wrapper { overflow-x: auto; padding-bottom: 20px; }
             .timeline-nodes { min-width: 600px; }
             .timeline-base-line, .timeline-progress { min-width: 600px; }
@@ -510,6 +649,45 @@
             }
             
             .node-item:last-child { margin-bottom: 0; }
+
+            /* АДАПТИВ ФУТЕРА (З ФАЙЛУ) */
+            .footer-bottom-content {
+                flex-direction: column; 
+                gap: 10px; 
+                text-align: center; 
+                padding: 0 20px;
+            }
+            
+            .footer-bottom-links a { 
+                margin: 0 10px; 
+            }
+            
+            .footer-contact-row { 
+                flex-direction: row; 
+                flex-wrap: wrap;     
+                justify-content: center;
+                gap: 10px;           
+            }
+
+            .contact-email {
+                width: 100%;
+                justify-content: center; 
+                margin-top: 5px;         
+                order: 3;                
+            }
+
+            .contact-address, .contact-phone {
+                order: 1; 
+            }
+            
+            .footer-divider { 
+                display: none; 
+            }
+
+            /* ДОДАТКОВИЙ КЛАС ДЛЯ ХОВАННЯ NAVBAR */
+            .navbar.nav-hidden {
+                transform: translateY(-101%);
+            }
         }
 
         @media (max-width: 480px) {
@@ -678,7 +856,7 @@
 
             <p>Ми працюємо тільки з офіційними роботодавцями, які пропонують стабільні умови, страхування, оплачувані податки та часто — житло й довіз до роботи. <strong>Усі вакансії для кандидатів є повністю безкоштовними</strong> — оплату за підбір персоналу здійснює роботодавець. Наші менеджери й координатори супроводжують людину на кожному етапі: від першої консультації і підготовки документів до приїзду та адаптації на місці роботи.</p>
 
-            <p>За роки роботи ми сформували широку партнерську мережу в Польщі та ЄС. Серед компаній, з якими працювали наші кандидати, — такі бренди як <strong>Amazon, DHL, Coca-Cola, Biedronka, Zara</strong> та інші великі роботодавці.</p>
+            <p>За роки роботи we сформували широку партнерську мережу в Польщі та ЄС. Серед компаній, з якими працювали наші кандидати, — такі бренди як <strong>Amazon, DHL, Coca-Cola, Biedronka, Zara</strong> та інші великі роботодавці.</p>
 
             <p>PROFIL JOBS забезпечує комфортні умови проживання, <strong>підтримку 24/7</strong>, можливість працювати без досвіду та без знання мови, а також пропонує швидкий процес оформлення — у багатьох випадках від <strong>1 до 3 днів</strong>.</p>
 
@@ -691,7 +869,7 @@
                         <div class="cert-item"><i class="fas fa-certificate icon-green"></i> REGON: <strong>386594291</strong></div>
                         <div class="cert-item"><i class="fas fa-file-alt icon-green"></i> KRS: <strong>0000851046</strong></div>
                         <div class="cert-item"><i class="fas fa-id-card icon-green"></i> NIP: <strong>5252829545</strong></div>
-                        <div class="cert-item"><i class="fas fa-map-marker-alt icon-red"></i> Адреса: <strong>Warszawa, Twarda 18, поверх 15</strong></div>
+                        <div class="cert-item"><i class="fas fa-map-marker-alt icon-red"></i> Адреса: <strong>Warszawa, Twarda 18</strong></div>
                     </div>
                 </div>
                 <!-- Низ: Реєстри (Футер блоку) -->
@@ -823,33 +1001,37 @@
         <div class="footer-content-centered">
             <h3>PROFIL JOBS</h3>
             <p>Ліцензоване кадрове агентство з багаторічним досвідом працевлаштування в Польщі.</p>
+            
             <div class="social-icons">
                 <a href="https://t.me/ProfilJobs" target="_blank" class="social-link-footer"><i class="fab fa-telegram-plane"></i></a>
                 <a href="https://www.tiktok.com/@profil.jobs.ua_pl" target="_blank" class="social-link-footer"><i class="fab fa-tiktok"></i></a>
                 <a href="viber://chat?number=+48660962345" target="_blank" class="social-link-footer"><i class="fab fa-viber"></i></a>
             </div>
+
             <div class="footer-laconic-links">
                 <a href="holovna.html">Головна</a>
                 <a href="vakansiyi.html">Вакансії</a>
                 <a href="pro-nas.html">Про нас</a>
                 <a href="bloh.html">Блог</a>
-                <span style="color:rgba(255,255,255,0.3)">|</span>
+                
+                <span class="footer-divider">|</span>
+                
                 <a href="polityka-konfidentsiynosti.html">Політика конфіденційності</a>
                 <a href="umovy-vykorystannya.html">Умови використання</a>
                 <a href="cookies.html">Cookies</a>
                 <a href="license.html">Ліцензія</a>
             </div>
+
             <div class="footer-contact-row">
-                <span><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
-                <span><i class="fas fa-phone"></i> +48 660 962 345</span>
-                <!-- UPDATED EMAIL -->
-                <span><i class="fas fa-envelope"></i> nicholasstascompany@gmail.com</span>
+                <span class="contact-address"><i class="fas fa-map-marker-alt"></i> Warszawa, Twarda 18</span>
+                <span class="contact-phone"><i class="fas fa-phone"></i> +48 660 962 345</span>
+                <span class="contact-email"><i class="fas fa-envelope"></i> nicholasstascompany@gmail.com</span>
             </div>
         </div>
+
         <div class="footer-bottom-bar">
             <div class="footer-bottom-content">
-                <!-- UPDATED COPYRIGHT -->
-                <div>© 2025 NicholaStas — всі права захищено / wszelkie prawa zastrzeżone</div>
+                <div>© 2025 NicholaStas — всі права захищено / wszelkie права zastrzeżone</div>
                 <div class="footer-bottom-links">
                     <a href="bezpeka.html">Безпека</a>
                     <a href="dopomoha.html">Допомога</a>
@@ -860,6 +1042,28 @@
 
     <!-- SCRIPTS -->
     <script>
+        // --- ЛОГІКА ЗГОРТАННЯ NAVBAR (MOBILE ONLY) ---
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth > 768) return;
+
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            const navbar = document.querySelector('.navbar');
+            const mobileMenuOpen =
+                document.querySelector('.nav-links')?.classList.contains('active');
+
+            if (mobileMenuOpen) return;
+
+            if (st > lastScrollTop && st > 100) {
+                navbar.classList.add('nav-hidden');
+            } else if (st < lastScrollTop) {
+                navbar.classList.remove('nav-hidden');
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
+        }, { passive: true });
+
         document.addEventListener("DOMContentLoaded", () => {
             const navbar = document.getElementById('main-navbar');
             const hamburger = document.getElementById('hamburger-btn');
@@ -879,7 +1083,7 @@
                 });
             }
 
-            // --- ЛОГІКА СКРОЛУ ---
+            // --- ЛОГІКА СКРОЛУ (BLUR EFFECT) ---
             window.addEventListener('scroll', function() {
                 const st = window.pageYOffset || document.documentElement.scrollTop;
                 
