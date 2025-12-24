@@ -840,6 +840,22 @@
         @keyframes swing-flipped { 0%{transform:scaleX(-1) rotate(0deg)} 25%{transform:scaleX(-1) rotate(10deg)} 50%{transform:scaleX(-1) rotate(-10deg)} 75%{transform:scaleX(-1) rotate(5deg)} 100%{transform:scaleX(-1) rotate(0deg)} }
         @keyframes pinDrop { 0% { transform: translateY(0); } 25% { transform: translateY(-12px); } 45% { transform: translateY(0); } 60% { transform: translateY(-6px); } 75% { transform: translateY(0); } 90% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
 
+        /* Desktop Spacing Fixes (>=992px) */
+        @media (min-width: 992px) {
+            .main-content {
+                margin-top: 30px;
+            }
+            .housing-title {
+                margin-top: 30px !important; /* Відступ між основним блоком і секцією фотожитла */
+            }
+            .section-title.housing-title {
+                margin-bottom: 20px !important; /* Відступ між заголовком "Фото житла" і галереєю */
+            }
+            #housing-gallery {
+                margin-top: 0 !important;
+            }
+        }
+
         /* General Media Queries */
         @media (max-width: 1024px) { 
             .main-content { grid-template-columns: 1fr; padding: 0 20px; } 
@@ -870,7 +886,7 @@
             .clock-chip { width: auto; justify-content: center; padding: 8px 25px; }
 
             .gallery-container { 
-                width: 100vw; margin: 20px calc(50% - 50vw) 25px; max-width: 100vw; 
+                width: 100vw; margin: 20px calc(50% - 50vw) 50px; max-width: 100vw; 
                 border-radius: 0 !important; box-shadow: none; background: #fff; 
                 min-height: auto; padding-bottom: 0;
             }
