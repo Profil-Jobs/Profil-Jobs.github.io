@@ -888,10 +888,6 @@
                 margin-bottom: 5px !important;
             }
 
-            .top-vacancy-bar { flex-direction: column-reverse; align-items: center; margin-bottom: 40px; }
-            .back-btn-modern { width: 100%; justify-content: center; }
-            .clock-chip { width: auto; justify-content: center; padding: 8px 25px; }
-
             .gallery-container { 
                 width: 100vw; 
                 margin: 20px calc(50% - 50vw) 50px calc(50% - 50vw) !important; 
@@ -948,7 +944,11 @@
             .benefits-grid { grid-template-columns: 1fr; }
             .benefit-card { padding: 20px; display: flex; flex-direction: column; align-items: center; }
 
-            .benefits-section { margin-top: 80px; }
+            /* ЗБІЛЬШЕНО ВІДСТАНЬ ДЛЯ УНІФІКАЦІЇ iOS ТА ANDROID (110px) */
+            .benefits-section { 
+                margin-top: 110px !important; 
+                display: flow-root; /* Допомагає iOS Safari правильно бачити відступ */
+            }
             .steps-section { margin-top: 92px; }
             .testimonials-section { margin-top: 85px; }
 
