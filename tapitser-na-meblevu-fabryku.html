@@ -878,11 +878,26 @@
             body { padding-top: 70px; }
             .container { padding: 0 5px; margin-top: 15px; }
             
+            /* Оновлена адаптація верхньої панелі */
+            .top-vacancy-bar { 
+                flex-direction: column-reverse; 
+                align-items: center; 
+                margin-bottom: 30px; 
+                gap: 20px;
+            }
+            .back-btn-modern { 
+                width: 100%; 
+                justify-content: center; 
+            }
+            .clock-chip { 
+                width: auto; 
+                justify-content: center; 
+                padding: 10px 30px; 
+            }
+
             .vacancy-title { font-size: 1.75rem; }
             .section-title, .contact-section h2 { font-size: 1.5rem; margin-bottom: 25px; }
 
-            /* ПОВЕРНЕНО ВІДСТАНЬ МІЖ IPHONE ТА ФОТО ЖИТЛА (15px) */
-            /* ТА ЗМЕНШЕНО ВІДСТАНЬ МІЖ НАЗВОЮ ТА ГАЛЕРЕЄЮ (5px) */
             .housing-title {
                 margin-top: 15px !important;
                 margin-bottom: 5px !important;
@@ -944,10 +959,9 @@
             .benefits-grid { grid-template-columns: 1fr; }
             .benefit-card { padding: 20px; display: flex; flex-direction: column; align-items: center; }
 
-            /* ЗБІЛЬШЕНО ВІДСТАНЬ ДЛЯ УНІФІКАЦІЇ iOS ТА ANDROID (110px) */
             .benefits-section { 
                 margin-top: 110px !important; 
-                display: flow-root; /* Допомагає iOS Safari правильно бачити відступ */
+                display: flow-root; 
             }
             .steps-section { margin-top: 92px; }
             .testimonials-section { margin-top: 85px; }
@@ -1024,7 +1038,7 @@
                         <div class="pulsing-dot"></div>
                         <span>PL <span id="clock-pl">00:00</span></span>
                         <span class="clock-divider">|</span>
-                        <span>UA <span id="clock-ua">01:00</span></span>
+                        <span>UA <span id="clock-ua">00:00</span></span>
                     </div>
                 </div>
                 
@@ -1542,24 +1556,19 @@
             if (phoneSlider) {
                 let phoneInterval;
 
-                // Функція припинення авто-скролу назавжди після взаємодії
                 const stopAutoScroll = () => {
                     if (phoneInterval) {
                         clearInterval(phoneInterval);
                         phoneInterval = null;
-                        
-                        // Видаляємо слухачі, щоб не навантажувати систему
                         phoneSlider.removeEventListener('touchstart', stopAutoScroll);
                         phoneSlider.removeEventListener('wheel', stopAutoScroll);
                         phoneSlider.removeEventListener('mousedown', stopAutoScroll);
-                        console.log('TikTok Auto-Scroll stopped permanently.');
                     }
                 };
 
                 const startAutoScroll = () => {
                     phoneInterval = setInterval(() => {
                         const { scrollTop, scrollHeight, clientHeight } = phoneSlider;
-                        // Якщо дійшли до кінця, повертаємось на початок, інакше гортаємо на 1 слайд
                         if (scrollTop + clientHeight >= scrollHeight - 10) {
                             phoneSlider.scrollTo({ top: 0, behavior: 'smooth' });
                         } else {
@@ -1567,7 +1576,6 @@
                         }
                     }, 3000);
 
-                    // Додаємо слухачі для першої взаємодії
                     phoneSlider.addEventListener('touchstart', stopAutoScroll, { passive: true });
                     phoneSlider.addEventListener('wheel', stopAutoScroll, { passive: true });
                     phoneSlider.addEventListener('mousedown', stopAutoScroll, { passive: true });
